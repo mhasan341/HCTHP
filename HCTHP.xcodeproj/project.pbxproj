@@ -14,6 +14,8 @@
 		51C66A732C4306E000FF3DC6 /* DrugGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51C66A722C4306E000FF3DC6 /* DrugGroup.swift */; };
 		51C66A752C4306FD00FF3DC6 /* ConceptGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51C66A742C4306FD00FF3DC6 /* ConceptGroup.swift */; };
 		51C66A772C43071200FF3DC6 /* ConceptProperty.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51C66A762C43071200FF3DC6 /* ConceptProperty.swift */; };
+		51C66A792C43082F00FF3DC6 /* AuthVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51C66A782C43082F00FF3DC6 /* AuthVM.swift */; };
+		51C66A7B2C43085200FF3DC6 /* DrugVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51C66A7A2C43085200FF3DC6 /* DrugVM.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -26,6 +28,9 @@
 		51C66A722C4306E000FF3DC6 /* DrugGroup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrugGroup.swift; sourceTree = "<group>"; };
 		51C66A742C4306FD00FF3DC6 /* ConceptGroup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConceptGroup.swift; sourceTree = "<group>"; };
 		51C66A762C43071200FF3DC6 /* ConceptProperty.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConceptProperty.swift; sourceTree = "<group>"; };
+		51C66A782C43082F00FF3DC6 /* AuthVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthVM.swift; sourceTree = "<group>"; };
+		51C66A7A2C43085200FF3DC6 /* DrugVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrugVM.swift; sourceTree = "<group>"; };
+		51C66A7C2C431AB800FF3DC6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -58,6 +63,7 @@
 		5170922A2C418F4A00C2AFA7 /* HCTHP */ = {
 			isa = PBXGroup;
 			children = (
+				51C66A7C2C431AB800FF3DC6 /* Info.plist */,
 				51C66A6F2C43061500FF3DC6 /* Utilities */,
 				51C66A6E2C43060E00FF3DC6 /* Services */,
 				51C66A6D2C4305FD00FF3DC6 /* Views */,
@@ -93,6 +99,8 @@
 		51C66A6C2C4305EB00FF3DC6 /* ViewModels */ = {
 			isa = PBXGroup;
 			children = (
+				51C66A782C43082F00FF3DC6 /* AuthVM.swift */,
+				51C66A7A2C43085200FF3DC6 /* DrugVM.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -204,7 +212,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				51C66A792C43082F00FF3DC6 /* AuthVM.swift in Sources */,
 				5170922E2C418F4A00C2AFA7 /* ContentView.swift in Sources */,
+				51C66A7B2C43085200FF3DC6 /* DrugVM.swift in Sources */,
 				51C66A772C43071200FF3DC6 /* ConceptProperty.swift in Sources */,
 				5170922C2C418F4A00C2AFA7 /* HCTHPApp.swift in Sources */,
 				51C66A752C4306FD00FF3DC6 /* ConceptGroup.swift in Sources */,
@@ -347,6 +357,7 @@
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = HCTHP/Info.plist;
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -355,8 +366,11 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = me.mahmudulhasan.HCTHP.HCTHP;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -374,6 +388,7 @@
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = HCTHP/Info.plist;
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -382,8 +397,11 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = me.mahmudulhasan.HCTHP.HCTHP;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};
