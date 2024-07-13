@@ -11,6 +11,9 @@
 		5170922E2C418F4A00C2AFA7 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5170922D2C418F4A00C2AFA7 /* ContentView.swift */; };
 		517092302C418F4C00C2AFA7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5170922F2C418F4C00C2AFA7 /* Assets.xcassets */; };
 		517092332C418F4C00C2AFA7 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 517092322C418F4C00C2AFA7 /* Preview Assets.xcassets */; };
+		51C66A732C4306E000FF3DC6 /* DrugGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51C66A722C4306E000FF3DC6 /* DrugGroup.swift */; };
+		51C66A752C4306FD00FF3DC6 /* ConceptGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51C66A742C4306FD00FF3DC6 /* ConceptGroup.swift */; };
+		51C66A772C43071200FF3DC6 /* ConceptProperty.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51C66A762C43071200FF3DC6 /* ConceptProperty.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -20,6 +23,9 @@
 		5170922F2C418F4C00C2AFA7 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		517092322C418F4C00C2AFA7 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		517092342C418F4C00C2AFA7 /* HCTHP.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = HCTHP.entitlements; sourceTree = "<group>"; };
+		51C66A722C4306E000FF3DC6 /* DrugGroup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrugGroup.swift; sourceTree = "<group>"; };
+		51C66A742C4306FD00FF3DC6 /* ConceptGroup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConceptGroup.swift; sourceTree = "<group>"; };
+		51C66A762C43071200FF3DC6 /* ConceptProperty.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConceptProperty.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -77,6 +83,9 @@
 		51C66A6B2C4305DA00FF3DC6 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				51C66A722C4306E000FF3DC6 /* DrugGroup.swift */,
+				51C66A742C4306FD00FF3DC6 /* ConceptGroup.swift */,
+				51C66A762C43071200FF3DC6 /* ConceptProperty.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -196,7 +205,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				5170922E2C418F4A00C2AFA7 /* ContentView.swift in Sources */,
+				51C66A772C43071200FF3DC6 /* ConceptProperty.swift in Sources */,
 				5170922C2C418F4A00C2AFA7 /* HCTHPApp.swift in Sources */,
+				51C66A752C4306FD00FF3DC6 /* ConceptGroup.swift in Sources */,
+				51C66A732C4306E000FF3DC6 /* DrugGroup.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
