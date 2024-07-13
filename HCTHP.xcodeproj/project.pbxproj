@@ -52,6 +52,11 @@
 		5170922A2C418F4A00C2AFA7 /* HCTHP */ = {
 			isa = PBXGroup;
 			children = (
+				51C66A6F2C43061500FF3DC6 /* Utilities */,
+				51C66A6E2C43060E00FF3DC6 /* Services */,
+				51C66A6D2C4305FD00FF3DC6 /* Views */,
+				51C66A6C2C4305EB00FF3DC6 /* ViewModels */,
+				51C66A6B2C4305DA00FF3DC6 /* Models */,
 				5170922B2C418F4A00C2AFA7 /* HCTHPApp.swift */,
 				5170922D2C418F4A00C2AFA7 /* ContentView.swift */,
 				5170922F2C418F4C00C2AFA7 /* Assets.xcassets */,
@@ -67,6 +72,57 @@
 				517092322C418F4C00C2AFA7 /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		51C66A6B2C4305DA00FF3DC6 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		51C66A6C2C4305EB00FF3DC6 /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = ViewModels;
+			sourceTree = "<group>";
+		};
+		51C66A6D2C4305FD00FF3DC6 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				51C66A712C43062B00FF3DC6 /* Drugs */,
+				51C66A702C43062600FF3DC6 /* Auth */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		51C66A6E2C43060E00FF3DC6 /* Services */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Services;
+			sourceTree = "<group>";
+		};
+		51C66A6F2C43061500FF3DC6 /* Utilities */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Utilities;
+			sourceTree = "<group>";
+		};
+		51C66A702C43062600FF3DC6 /* Auth */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Auth;
+			sourceTree = "<group>";
+		};
+		51C66A712C43062B00FF3DC6 /* Drugs */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Drugs;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
