@@ -7,8 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		51701FDE2C440B68009ED8D1 /* OnboardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51701FDD2C440B68009ED8D1 /* OnboardingView.swift */; };
+		51701FE02C440B7A009ED8D1 /* RegistrationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51701FDF2C440B7A009ED8D1 /* RegistrationView.swift */; };
+		51701FE22C440B80009ED8D1 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51701FE12C440B80009ED8D1 /* LoginView.swift */; };
 		5170922C2C418F4A00C2AFA7 /* HCTHPApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5170922B2C418F4A00C2AFA7 /* HCTHPApp.swift */; };
-		5170922E2C418F4A00C2AFA7 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5170922D2C418F4A00C2AFA7 /* ContentView.swift */; };
 		517092302C418F4C00C2AFA7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5170922F2C418F4C00C2AFA7 /* Assets.xcassets */; };
 		517092332C418F4C00C2AFA7 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 517092322C418F4C00C2AFA7 /* Preview Assets.xcassets */; };
 		51C66A732C4306E000FF3DC6 /* DrugGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51C66A722C4306E000FF3DC6 /* DrugGroup.swift */; };
@@ -19,9 +21,11 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		51701FDD2C440B68009ED8D1 /* OnboardingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingView.swift; sourceTree = "<group>"; };
+		51701FDF2C440B7A009ED8D1 /* RegistrationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationView.swift; sourceTree = "<group>"; };
+		51701FE12C440B80009ED8D1 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 		517092282C418F4A00C2AFA7 /* HCTHP.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HCTHP.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5170922B2C418F4A00C2AFA7 /* HCTHPApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HCTHPApp.swift; sourceTree = "<group>"; };
-		5170922D2C418F4A00C2AFA7 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		5170922F2C418F4C00C2AFA7 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		517092322C418F4C00C2AFA7 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		517092342C418F4C00C2AFA7 /* HCTHP.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = HCTHP.entitlements; sourceTree = "<group>"; };
@@ -70,7 +74,6 @@
 				51C66A6C2C4305EB00FF3DC6 /* ViewModels */,
 				51C66A6B2C4305DA00FF3DC6 /* Models */,
 				5170922B2C418F4A00C2AFA7 /* HCTHPApp.swift */,
-				5170922D2C418F4A00C2AFA7 /* ContentView.swift */,
 				5170922F2C418F4C00C2AFA7 /* Assets.xcassets */,
 				517092342C418F4C00C2AFA7 /* HCTHP.entitlements */,
 				517092312C418F4C00C2AFA7 /* Preview Content */,
@@ -131,6 +134,9 @@
 		51C66A702C43062600FF3DC6 /* Auth */ = {
 			isa = PBXGroup;
 			children = (
+				51701FDD2C440B68009ED8D1 /* OnboardingView.swift */,
+				51701FDF2C440B7A009ED8D1 /* RegistrationView.swift */,
+				51701FE12C440B80009ED8D1 /* LoginView.swift */,
 			);
 			path = Auth;
 			sourceTree = "<group>";
@@ -213,11 +219,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				51C66A792C43082F00FF3DC6 /* AuthVM.swift in Sources */,
-				5170922E2C418F4A00C2AFA7 /* ContentView.swift in Sources */,
 				51C66A7B2C43085200FF3DC6 /* DrugVM.swift in Sources */,
+				51701FE02C440B7A009ED8D1 /* RegistrationView.swift in Sources */,
 				51C66A772C43071200FF3DC6 /* ConceptProperty.swift in Sources */,
 				5170922C2C418F4A00C2AFA7 /* HCTHPApp.swift in Sources */,
+				51701FDE2C440B68009ED8D1 /* OnboardingView.swift in Sources */,
 				51C66A752C4306FD00FF3DC6 /* ConceptGroup.swift in Sources */,
+				51701FE22C440B80009ED8D1 /* LoginView.swift in Sources */,
 				51C66A732C4306E000FF3DC6 /* DrugGroup.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
