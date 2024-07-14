@@ -84,7 +84,7 @@ public struct TextInputField: View {
             }
             if (text.isEmpty || isValid) {
                 Text(title)
-                    .foregroundColor(text.isEmpty ? Color(.placeholderText) : .label)
+                    .foregroundColor(text.isEmpty ? Color(.placeholderText) : .hcLabel)
                     .offset(y: text.isEmpty ? 0 : -25)
                     .scaleEffect(text.isEmpty ? 1: 0.8, anchor: .leading)
             }

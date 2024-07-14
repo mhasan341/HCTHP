@@ -8,9 +8,6 @@
 import SwiftUI
 
 struct RegistrationView: View {
-    // we're hiding the back button as per design but keeping swipe back
-    @Environment(\.dismiss) var dismiss
-
     // these will hold the values we'll send to server
     @State private var name: String = ""
     @State private var email: String = ""

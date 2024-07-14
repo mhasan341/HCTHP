@@ -8,6 +8,9 @@
 import SwiftUI
 
 struct OnboardingView: View {
+    // just a little animation
+    @State private var logoScale: CGFloat = 1.0
+
     var body: some View {
 
         NavigationStack {
@@ -17,6 +20,12 @@ struct OnboardingView: View {
                 Image("logo")
                     .resizable()
                     .frame(width: 150, height: 150)
+                    .scaleEffect(logoScale)
+                    .onAppear {
+                        withAnimation(Animation.spring(duration: 1.5).repeatForever(autoreverses: true)) {
+                            logoScale = 1.1
+                        }
+                    }
 
                 Spacer()
                 // for simplicity using NavigationLink in this project

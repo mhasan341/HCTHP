@@ -12,7 +12,7 @@ class AppDelegate: NSObject, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey : Any]? = nil) -> Bool {
         IQKeyboardManager.shared.enable = true
         IQKeyboardManager.shared.resignOnTouchOutside = true
-        IQKeyboardManager.shared.toolbarConfiguration.previousNextDisplayMode = .alwaysShow
+        IQKeyboardManager.shared.toolbarConfiguration.previousNextDisplayMode = .alwaysHide
 
         return true
     }
