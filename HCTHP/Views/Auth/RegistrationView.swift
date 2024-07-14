@@ -34,7 +34,12 @@ struct RegistrationView: View {
             VStack(alignment: .leading, spacing: 20) {
 
                 TextInputField("Name", text: $name)
+                    .submitLabel(.next)
                     .clearButtonHidden()
+                    .focused($focusedField, equals: .name)
+                    .onSubmit {
+                        focusedField = .email
+                    }
                     .padding()
                     .background(Color(.systemGray6))
                     .cornerRadius(10)
@@ -44,7 +49,12 @@ struct RegistrationView: View {
                     )
 
                 TextInputField("Email", text: $email)
+                    .submitLabel(.next)
                     .clearButtonHidden()
+                    .focused($focusedField, equals: .email)
+                    .onSubmit {
+                        focusedField = .password
+                    }
                     .padding()
                     .background(Color(.systemGray6))
                     .cornerRadius(10)
@@ -56,6 +66,11 @@ struct RegistrationView: View {
                 // Not using the system SecureField as we need the floating behavior
                 TextInputField("Create a password", text: $password)
                     .clearButtonHidden()
+                    .submitLabel(.go)
+                    .focused($focusedField, equals: .password)
+                    .onSubmit {
+                        //call the registration function here
+                    }
                     .setTextFieldSecure(isSecure)
                     .textContentType(.password)
                     .padding()
