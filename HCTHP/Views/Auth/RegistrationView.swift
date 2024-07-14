@@ -19,6 +19,9 @@ struct RegistrationView: View {
     // for our custom secure field
     @State private var isSecure: Bool = true
 
+    // to move to next textfield
+    @FocusState private var focusedField: RegistrationFields?
+
     var body: some View {
         // We'll add navigation later
         VStack {
