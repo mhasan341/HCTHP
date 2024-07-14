@@ -43,6 +43,7 @@ struct OnboardingView: View {
                 .padding(.bottom, 30)
 
             } // VStack
+            .toolbar(.hidden, for: .navigationBar)
         }
 
     }
