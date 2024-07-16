@@ -12,7 +12,7 @@ struct RegistrationView: View {
     @StateObject private var authVM = AuthVM()
     // these will hold the values we'll send to server
     @State private var name: String = "Aman"
-    @State private var email: String = "amp@gmail.com"
+    @State private var email: String = "mahmudxx@housecall.ae"
     @State private var password: String = "password"
 
     // for our custom secure field
@@ -97,6 +97,15 @@ struct RegistrationView: View {
             .padding(.horizontal, 20)
             .padding(.top, 40)
 
+            // show the loading view based on status
+            if authVM.isLoading {
+                ProgressView()
+                    .progressViewStyle(.circular)
+                    .scaleEffect(1.5)
+                    .padding(.top, 20)
+            }
+
+
             Spacer()
 
             Button(action: {
@@ -117,15 +126,20 @@ struct RegistrationView: View {
 
         } // VStack
         .navigationBarBackButtonHidden()
+        // To track errors
+        .onChange(of: authVM.signupError) { oldValue, newValue in
+            print("Signup Error: \(newValue)")
+        }
+
 
     } // body
 
     private func doRegistration(){
         // hide the keyboard if present
         IQKeyboardManager.shared.resignFirstResponder()
-//        Task {
-//            await authVM.signUp(name: name, email: email, password: password)
-//        }
+
+        authVM.signUp(name: name, email: email, password: password)
+
     }
 }
 

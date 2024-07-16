@@ -12,7 +12,7 @@ struct LoginView: View {
     @StateObject private var authVM = AuthVM()
 
     // these will hold the values we'll send to server
-    @State private var email: String = "mahmud@housecall.ae"
+    @State private var email: String = "mahmudxx@housecall.ae"
     @State private var password: String = "password"
 
     // for our custom secure field
@@ -80,6 +80,14 @@ struct LoginView: View {
             }
             .padding(.horizontal, 20)
             .padding(.top, 40)
+
+            // show the loading view based on status
+            if authVM.isLoading {
+                ProgressView()
+                    .progressViewStyle(.circular)
+                    .scaleEffect(1.5)
+                    .padding(.top, 20)
+            }
 
             Spacer()
 
