@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import IQKeyboardManagerSwift
 
 struct LoginView: View {
     @StateObject private var authVM = AuthVM()
@@ -106,6 +107,9 @@ struct LoginView: View {
 
     /// validates then takes the call to ViewModel
     private func login(){
+        // hide the keyboard if present
+        IQKeyboardManager.shared.resignFirstResponder()
+
         #warning("Do some validation here")
         Task {
             await authVM.login(email: email, password: password)

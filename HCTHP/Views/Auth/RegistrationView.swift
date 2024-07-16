@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import IQKeyboardManagerSwift
 
 struct RegistrationView: View {
     @StateObject private var authVM = AuthVM()
@@ -120,9 +121,11 @@ struct RegistrationView: View {
     } // body
 
     private func doRegistration(){
-        Task {
-            await authVM.signUp(name: name, email: email, password: password)
-        }
+        // hide the keyboard if present
+        IQKeyboardManager.shared.resignFirstResponder()
+//        Task {
+//            await authVM.signUp(name: name, email: email, password: password)
+//        }
     }
 }
 
