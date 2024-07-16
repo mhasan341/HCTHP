@@ -14,6 +14,7 @@
 		51701FEA2C44698B009ED8D1 /* IQKeyboardManagerSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 51701FE92C44698B009ED8D1 /* IQKeyboardManagerSwift */; };
 		51701FEC2C446A2C009ED8D1 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51701FEB2C446A2C009ED8D1 /* AppDelegate.swift */; };
 		51701FEE2C446C3C009ED8D1 /* Enums.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51701FED2C446C3C009ED8D1 /* Enums.swift */; };
+		51701FF02C4482FE009ED8D1 /* LoginObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51701FEF2C4482FE009ED8D1 /* LoginObject.swift */; };
 		5170922C2C418F4A00C2AFA7 /* HCTHPApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5170922B2C418F4A00C2AFA7 /* HCTHPApp.swift */; };
 		517092302C418F4C00C2AFA7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5170922F2C418F4C00C2AFA7 /* Assets.xcassets */; };
 		517092332C418F4C00C2AFA7 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 517092322C418F4C00C2AFA7 /* Preview Assets.xcassets */; };
@@ -22,6 +23,8 @@
 		51C66A772C43071200FF3DC6 /* ConceptProperty.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51C66A762C43071200FF3DC6 /* ConceptProperty.swift */; };
 		51C66A792C43082F00FF3DC6 /* AuthVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51C66A782C43082F00FF3DC6 /* AuthVM.swift */; };
 		51C66A7B2C43085200FF3DC6 /* DrugVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51C66A7A2C43085200FF3DC6 /* DrugVM.swift */; };
+		51E83AF42C459A2D0066F4C6 /* ApiContant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51E83AF32C459A2D0066F4C6 /* ApiContant.swift */; };
+		51E83AF62C45A2580066F4C6 /* RegistrationObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51E83AF52C45A2580066F4C6 /* RegistrationObject.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -31,6 +34,7 @@
 		51701FE62C444908009ED8D1 /* TextInputField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextInputField.swift; sourceTree = "<group>"; };
 		51701FEB2C446A2C009ED8D1 /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		51701FED2C446C3C009ED8D1 /* Enums.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Enums.swift; sourceTree = "<group>"; };
+		51701FEF2C4482FE009ED8D1 /* LoginObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginObject.swift; sourceTree = "<group>"; };
 		517092282C418F4A00C2AFA7 /* HCTHP.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HCTHP.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5170922B2C418F4A00C2AFA7 /* HCTHPApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HCTHPApp.swift; sourceTree = "<group>"; };
 		5170922F2C418F4C00C2AFA7 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -42,6 +46,8 @@
 		51C66A782C43082F00FF3DC6 /* AuthVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthVM.swift; sourceTree = "<group>"; };
 		51C66A7A2C43085200FF3DC6 /* DrugVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrugVM.swift; sourceTree = "<group>"; };
 		51C66A7C2C431AB800FF3DC6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		51E83AF32C459A2D0066F4C6 /* ApiContant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiContant.swift; sourceTree = "<group>"; };
+		51E83AF52C45A2580066F4C6 /* RegistrationObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationObject.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -62,6 +68,15 @@
 				51701FE62C444908009ED8D1 /* TextInputField.swift */,
 			);
 			path = Widget;
+			sourceTree = "<group>";
+		};
+		51701FF12C448315009ED8D1 /* Auth */ = {
+			isa = PBXGroup;
+			children = (
+				51701FEF2C4482FE009ED8D1 /* LoginObject.swift */,
+				51E83AF52C45A2580066F4C6 /* RegistrationObject.swift */,
+			);
+			path = Auth;
 			sourceTree = "<group>";
 		};
 		5170921F2C418F4A00C2AFA7 = {
@@ -109,6 +124,7 @@
 		51C66A6B2C4305DA00FF3DC6 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				51701FF12C448315009ED8D1 /* Auth */,
 				51C66A722C4306E000FF3DC6 /* DrugGroup.swift */,
 				51C66A742C4306FD00FF3DC6 /* ConceptGroup.swift */,
 				51C66A762C43071200FF3DC6 /* ConceptProperty.swift */,
@@ -146,6 +162,7 @@
 			children = (
 				51701FEB2C446A2C009ED8D1 /* AppDelegate.swift */,
 				51701FED2C446C3C009ED8D1 /* Enums.swift */,
+				51E83AF32C459A2D0066F4C6 /* ApiContant.swift */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -253,8 +270,11 @@
 				51701FE72C444908009ED8D1 /* TextInputField.swift in Sources */,
 				51C66A752C4306FD00FF3DC6 /* ConceptGroup.swift in Sources */,
 				51701FE22C440B80009ED8D1 /* LoginView.swift in Sources */,
+				51E83AF62C45A2580066F4C6 /* RegistrationObject.swift in Sources */,
+				51E83AF42C459A2D0066F4C6 /* ApiContant.swift in Sources */,
 				51701FEE2C446C3C009ED8D1 /* Enums.swift in Sources */,
 				51C66A732C4306E000FF3DC6 /* DrugGroup.swift in Sources */,
+				51701FF02C4482FE009ED8D1 /* LoginObject.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

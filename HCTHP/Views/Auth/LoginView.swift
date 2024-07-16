@@ -8,9 +8,11 @@
 import SwiftUI
 
 struct LoginView: View {
+    @StateObject private var authVM = AuthVM()
+
     // these will hold the values we'll send to server
-    @State private var email: String = ""
-    @State private var password: String = ""
+    @State private var email: String = "mahmud@housecall.ae"
+    @State private var password: String = "password"
 
     // for our custom secure field
     @State private var isSecure: Bool = true
@@ -51,7 +53,7 @@ struct LoginView: View {
                     .submitLabel(.go)
                     .focused($focusedField, equals: .password)
                     .onSubmit {
-                        //call the registration function here
+                        login()
                     }
                     .setTextFieldSecure(isSecure)
                     .textContentType(.password)
@@ -81,7 +83,7 @@ struct LoginView: View {
             Spacer()
 
             Button(action: {
-                // Call the VM here
+                login()
             }) {
                 Text("Log In")
                     .font(.headline)
@@ -100,6 +102,15 @@ struct LoginView: View {
         .navigationBarBackButtonHidden()
 
     } // body
+
+
+    /// validates then takes the call to ViewModel
+    private func login(){
+        #warning("Do some validation here")
+        Task {
+            await authVM.login(email: email, password: password)
+        }
+    }
 }
 
 #Preview {

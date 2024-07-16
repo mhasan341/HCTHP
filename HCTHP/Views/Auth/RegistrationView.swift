@@ -8,10 +8,11 @@
 import SwiftUI
 
 struct RegistrationView: View {
+    @StateObject private var authVM = AuthVM()
     // these will hold the values we'll send to server
-    @State private var name: String = ""
-    @State private var email: String = ""
-    @State private var password: String = ""
+    @State private var name: String = "Aman"
+    @State private var email: String = "amp@gmail.com"
+    @State private var password: String = "password"
 
     // for our custom secure field
     @State private var isSecure: Bool = true
@@ -48,6 +49,8 @@ struct RegistrationView: View {
                 TextInputField("Email", text: $email)
                     .submitLabel(.next)
                     .clearButtonHidden()
+                    .textContentType(.emailAddress)
+                    .keyboardType(.emailAddress)
                     .focused($focusedField, equals: .email)
                     .onSubmit {
                         focusedField = .password
@@ -66,7 +69,7 @@ struct RegistrationView: View {
                     .submitLabel(.go)
                     .focused($focusedField, equals: .password)
                     .onSubmit {
-                        //call the registration function here
+                        doRegistration()
                     }
                     .setTextFieldSecure(isSecure)
                     .textContentType(.password)
@@ -96,7 +99,7 @@ struct RegistrationView: View {
             Spacer()
 
             Button(action: {
-                // Call the VM here
+                doRegistration()
             }) {
                 Text("Create Account")
                     .font(.headline)
@@ -115,6 +118,12 @@ struct RegistrationView: View {
         .navigationBarBackButtonHidden()
 
     } // body
+
+    private func doRegistration(){
+        Task {
+            await authVM.signUp(name: name, email: email, password: password)
+        }
+    }
 }
 
 #Preview {

@@ -9,7 +9,8 @@ import SwiftUI
 
 struct OnboardingView: View {
     // just a little animation
-    @State private var logoScale: CGFloat = 1.0
+    @State private var logoScale: CGFloat = 2.4
+    @State private var buttonsVisible = false
 
     var body: some View {
 
@@ -22,13 +23,16 @@ struct OnboardingView: View {
                     .frame(width: 150, height: 150)
                     .scaleEffect(logoScale)
                     .onAppear {
-                        withAnimation(Animation.spring(duration: 1.5).repeatForever(autoreverses: true)) {
-                            logoScale = 1.1
+                        withAnimation(Animation.spring(duration: 1.5).repeatCount(1)) {
+                            logoScale = 1.0
+                            buttonsVisible = true
                         }
                     }
 
                 Spacer()
                 // for simplicity using NavigationLink in this project
+
+                if buttonsVisible {
 
                 // Takes user to registration view
                 NavigationLink(destination: RegistrationView()) {
@@ -50,6 +54,8 @@ struct OnboardingView: View {
                         .foregroundColor(.blue)
                 }
                 .padding(.bottom, 30)
+
+                } // buttonsVisible
 
             } // VStack
             .toolbar(.hidden, for: .navigationBar)
