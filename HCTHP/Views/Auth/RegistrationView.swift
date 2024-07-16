@@ -7,19 +7,24 @@
 
 import SwiftUI
 import IQKeyboardManagerSwift
+import Combine
 
 struct RegistrationView: View {
     @StateObject private var authVM = AuthVM()
     // these will hold the values we'll send to server
-    @State private var name: String = "Aman"
+    @State private var name: String = ""
     @State private var email: String = "mahmudxx@housecall.ae"
     @State private var password: String = "password"
+
+    @State private var emailError = ""
+    @State private var passwordError = ""
 
     // for our custom secure field
     @State private var isSecure: Bool = true
 
     // to move to next textfield
     @FocusState private var focusedField: RegistrationFields?
+
 
     var body: some View {
         // We'll add navigation later
@@ -32,20 +37,7 @@ struct RegistrationView: View {
 
             VStack(alignment: .leading, spacing: 20) {
 
-                TextInputField("Name", text: $name)
-                    .submitLabel(.next)
-                    .clearButtonHidden()
-                    .focused($focusedField, equals: .name)
-                    .onSubmit {
-                        focusedField = .email
-                    }
-                    .padding()
-                    .background(Color(.systemGray6))
-                    .cornerRadius(10)
-                    .overlay(
-                        RoundedRectangle(cornerRadius: 10)
-                            .stroke(Color(.systemGray4), lineWidth: 1)
-                    )
+                NameView(name: $name, focusedField: _focusedField, authVM: authVM)
 
                 TextInputField("Email", text: $email)
                     .submitLabel(.next)
@@ -127,8 +119,18 @@ struct RegistrationView: View {
         } // VStack
         .navigationBarBackButtonHidden()
         // To track errors
-        .onChange(of: authVM.signupError) { oldValue, newValue in
-            print("Signup Error: \(newValue)")
+        .onChange(of: authVM.detailedErrors) { oldValue, newValue in
+
+            for key in newValue.keys {
+                switch key {
+                    case "email":
+                        self.emailError = newValue["email", default: ""]
+                    default:
+                        // we don't have to use this
+                        print("No more errors!")
+                }
+            }
+
         }
 
 
@@ -141,6 +143,8 @@ struct RegistrationView: View {
         authVM.signUp(name: name, email: email, password: password)
 
     }
+
+    
 }
 
 #Preview {

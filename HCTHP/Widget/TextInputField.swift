@@ -115,7 +115,7 @@ public struct TextInputField: View {
 
 
         }
-        .padding(.top, text.isEmpty ? 0 : 15)
+        .padding(.top, (text.isEmpty && isValid) ? 0 : 15)
         .animation(.smooth(duration: 0.1), value: text.isEmpty)
         .animation(.default, value: text)
     }

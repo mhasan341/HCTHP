@@ -14,21 +14,14 @@ struct RegistrationObject: Codable {
     let errors: SignupErrors?
 }
 
+// We're validating name and password on client side, so skipping that part
 struct SignupErrors: Codable {
-    let name: [String]?
     let email: [String]?
-    let password: [String]?
 
-    func allErrors() -> [String] {
-        var allErrors: [String] = []
-        if let nameErrors = name {
-            allErrors.append(contentsOf: nameErrors)
-        }
-        if let emailErrors = email {
-            allErrors.append(contentsOf: emailErrors)
-        }
-        if let passwordErrors = password {
-            allErrors.append(contentsOf: passwordErrors)
+    func allErrors() -> [String: String] {
+        var allErrors: [String: String] = [:]
+        if let errors = email, let emailError = errors.first {
+            allErrors["email"] = emailError
         }
         return allErrors
     }

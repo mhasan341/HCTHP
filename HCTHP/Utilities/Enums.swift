@@ -7,6 +7,7 @@
 
 import Foundation
 
+/// to be used for focus
 enum RegistrationFields {
     case name
     case email

@@ -26,6 +26,7 @@
 		51E83AF42C459A2D0066F4C6 /* ApiContant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51E83AF32C459A2D0066F4C6 /* ApiContant.swift */; };
 		51E83AF62C45A2580066F4C6 /* RegistrationObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51E83AF52C45A2580066F4C6 /* RegistrationObject.swift */; };
 		51E83AF82C46EB770066F4C6 /* UINavigationController+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51E83AF72C46EB770066F4C6 /* UINavigationController+Ext.swift */; };
+		51E83AFB2C47265B0066F4C6 /* NameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51E83AFA2C47265B0066F4C6 /* NameView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -50,6 +51,7 @@
 		51E83AF32C459A2D0066F4C6 /* ApiContant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiContant.swift; sourceTree = "<group>"; };
 		51E83AF52C45A2580066F4C6 /* RegistrationObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationObject.swift; sourceTree = "<group>"; };
 		51E83AF72C46EB770066F4C6 /* UINavigationController+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UINavigationController+Ext.swift"; sourceTree = "<group>"; };
+		51E83AFA2C47265B0066F4C6 /* NameView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NameView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -67,6 +69,7 @@
 		51701FE52C4448D2009ED8D1 /* Widget */ = {
 			isa = PBXGroup;
 			children = (
+				51E83AF92C4726440066F4C6 /* subview */,
 				51701FE62C444908009ED8D1 /* TextInputField.swift */,
 			);
 			path = Widget;
@@ -187,6 +190,14 @@
 			path = Drugs;
 			sourceTree = "<group>";
 		};
+		51E83AF92C4726440066F4C6 /* subview */ = {
+			isa = PBXGroup;
+			children = (
+				51E83AFA2C47265B0066F4C6 /* NameView.swift */,
+			);
+			path = subview;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -269,6 +280,7 @@
 				51C66A7B2C43085200FF3DC6 /* DrugVM.swift in Sources */,
 				51701FE02C440B7A009ED8D1 /* RegistrationView.swift in Sources */,
 				51C66A772C43071200FF3DC6 /* ConceptProperty.swift in Sources */,
+				51E83AFB2C47265B0066F4C6 /* NameView.swift in Sources */,
 				5170922C2C418F4A00C2AFA7 /* HCTHPApp.swift in Sources */,
 				51701FDE2C440B68009ED8D1 /* OnboardingView.swift in Sources */,
 				51701FE72C444908009ED8D1 /* TextInputField.swift in Sources */,
