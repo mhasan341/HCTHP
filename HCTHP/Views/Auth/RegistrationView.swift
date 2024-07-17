@@ -20,8 +20,6 @@ struct RegistrationView: View {
     @State private var emailError = ""
     @State private var passwordError = ""
 
-    // for our custom secure field
-    @State private var isSecure: Bool = true
 
     // to move to next textfield
     @FocusState private var focusedField: RegistrationFields?
@@ -38,11 +36,15 @@ struct RegistrationView: View {
 
             VStack(alignment: .leading, spacing: 20) {
 
+                // for the name input
                 NameView(name: $name, focusedField: _focusedField)
-
+                // for the email input
                 EmailView(email: $email, focusedField: _focusedField)
+                // for the password input
+                PasswordView(password: $password, focusedField: _focusedField) {
+                    doRegistration()
+                }
 
-                
             }
             .padding(.horizontal, 20)
             .padding(.top, 40)
@@ -58,19 +60,13 @@ struct RegistrationView: View {
 
             Spacer()
 
-            Button(action: {
+           // the action button
+            HCActionButton(buttonTitle: "Create Account") {
+                // The validation for name, email and password will show the errors where required
+                // But we need to control the action button
                 doRegistration()
-            }) {
-                Text("Create Account")
-                    .font(.headline)
-                    .foregroundColor(.white)
-                    .frame(maxWidth: .infinity)
-                    .padding()
-                    .background(Color.blue)
-                    .cornerRadius(10)
-                    .padding(.horizontal, 20)
-                    .padding(.top, 40)
             }
+            .disabled(authVM.shouldDisableRegistrationButton())
 
 
 
@@ -79,6 +75,7 @@ struct RegistrationView: View {
         // To track errors
         .onChange(of: authVM.detailedErrors) { oldValue, newValue in
 
+            #warning("Show an alert")
             for key in newValue.keys {
                 switch key {
                     case "email":
@@ -102,8 +99,11 @@ struct RegistrationView: View {
         // hide the keyboard if present
         IQKeyboardManager.shared.resignFirstResponder()
 
-        authVM.signUp(name: name, email: email, password: password)
+        // The validation for name, email and password will show the errors where required
+        // But we need to control the action button
 
+        // calls the authVM
+        authVM.signUp(name: name, email: email, password: password)
     }
 
     

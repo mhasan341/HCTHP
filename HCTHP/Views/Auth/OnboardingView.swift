@@ -37,7 +37,10 @@ struct OnboardingView: View {
                 if buttonsVisible {
 
                 // Takes user to registration view
-                NavigationLink(destination: RegistrationView()) {
+                NavigationLink(destination: 
+                                RegistrationView()
+                                        .environmentObject(authVM)
+                ) {
                     Text("Create New Account")
                         .font(.headline)
                         .foregroundColor(.white)
@@ -61,7 +64,7 @@ struct OnboardingView: View {
 
             } // VStack
             .toolbar(.hidden, for: .navigationBar)
-            .environmentObject(authVM)
+
         }
 
     }

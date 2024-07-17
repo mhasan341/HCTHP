@@ -26,10 +26,13 @@ class AuthVM: ObservableObject {
     private let nameSubject = PassthroughSubject<String, Never>()
     /// Emits the email that needs to be validated
     private let emailSubject = PassthroughSubject<String, Never>()
+    /// Emits the password that needs to be validated
+    private let passwordSubject = PassthroughSubject<String, Never>()
 
     /// Published to update the view with the latest validation result.
     @Published var nameValidationResult: Result<Bool, ValidationError>?
     @Published var emailValidationResult: Result<Bool, ValidationError>?
+    @Published var passwordValidationResult: Result<Bool, ValidationError>?
 
     init() {
         setupValidations()
@@ -149,6 +152,7 @@ class AuthVM: ObservableObject {
     //MARK: Name Validation
     // setting up the validation process of name field using Combine
     private func setupValidations() {
+        // Publisher for name
         nameSubject
             .dropFirst() // to prevent error from showing when user just opened the screen
             .sink { [weak self] name in
@@ -157,11 +161,21 @@ class AuthVM: ObservableObject {
             }
             .store(in: &cancellables)
 
+        // Publisher for email
         emailSubject
             .dropFirst() // Skip the first emitted value for email
             .sink { [weak self] email in
                 guard let self = self else { return }
                 self.emailValidationResult = self.validateEmailConditions(email)
+            }
+            .store(in: &cancellables)
+
+        // Publisher for password
+        passwordSubject
+            .dropFirst() // Skip the first emitted value for email
+            .sink { [weak self] password in
+                guard let self = self else { return }
+                self.passwordValidationResult = self.validatePasswordConditions(password)
             }
             .store(in: &cancellables)
     }
@@ -214,5 +228,41 @@ class AuthVM: ObservableObject {
 
 
     //MARK: Password Validation
+
+    /// validates the password and returns the result
+    func validatePassword(_ password: String) -> Result<Bool, ValidationError> {
+        passwordSubject.send(password)
+        return passwordValidationResult ?? .success(true)
+    }
+
+    /// takes a password and runs our predefined conditions on it
+    private func validatePasswordConditions(_ password: String)-> Result<Bool, ValidationError> {
+        if password.isEmpty {
+            return .failure(ValidationError(message: "Password is required"))
+        } else if password.count < 8 {
+            return .failure(ValidationError(message: "Password must be at least 8 characters long"))
+        } else {
+            return .success(true)
+        }
+    }
+
+    //MARK: For action button
+
+    /// returns if all input fields in registration view is valid
+    func shouldDisableRegistrationButton()->Bool{
+        if case .success(let nameIsValid) = nameValidationResult, nameIsValid,
+           case .success(let emailIsValid) = emailValidationResult, emailIsValid,
+           case .success(let passwordIsValid) = passwordValidationResult, passwordIsValid {
+            return false
+        } else {
+            return true
+        }
+    }
+
+
+
+
+
+
 }
 

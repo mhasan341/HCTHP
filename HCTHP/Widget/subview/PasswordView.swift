@@ -9,18 +9,27 @@ import SwiftUI
 
 struct PasswordView: View {
     
-    @Binding var email: String
+    @Binding var password: String
     @FocusState var focusedField: RegistrationFields?
     @EnvironmentObject var authVM: AuthVM
-    
+
+    // for our custom secure field
+    @State private var isSecure: Bool = true
+
+    var onTap: ()->Void?
+
     var body: some View {
         // Not using the system SecureField as we need the floating behavior
         TextInputField("Create a password", text: $password)
             .clearButtonHidden()
             .submitLabel(.go)
             .focused($focusedField, equals: .password)
+            .onValidate{ password in
+                return authVM.validatePassword(password)
+            }
             .onSubmit {
-                doRegistration()
+                // since it's the last view on both auth views, we want to pass the event to the root view
+                onTap()
             }
             .setTextFieldSecure(isSecure)
             .textContentType(.password)
@@ -44,8 +53,4 @@ struct PasswordView: View {
                 }
             )
     }
-}
-
-#Preview {
-    PasswordView()
 }

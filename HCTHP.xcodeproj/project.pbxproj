@@ -29,6 +29,7 @@
 		51E83AFB2C47265B0066F4C6 /* NameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51E83AFA2C47265B0066F4C6 /* NameView.swift */; };
 		51E83AFD2C4741600066F4C6 /* EmailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51E83AFC2C4741600066F4C6 /* EmailView.swift */; };
 		51E83AFF2C4743F00066F4C6 /* PasswordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51E83AFE2C4743F00066F4C6 /* PasswordView.swift */; };
+		51E83B012C47451A0066F4C6 /* HCActionButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51E83B002C47451A0066F4C6 /* HCActionButton.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -56,6 +57,7 @@
 		51E83AFA2C47265B0066F4C6 /* NameView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NameView.swift; sourceTree = "<group>"; };
 		51E83AFC2C4741600066F4C6 /* EmailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmailView.swift; sourceTree = "<group>"; };
 		51E83AFE2C4743F00066F4C6 /* PasswordView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordView.swift; sourceTree = "<group>"; };
+		51E83B002C47451A0066F4C6 /* HCActionButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HCActionButton.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -200,6 +202,7 @@
 				51E83AFA2C47265B0066F4C6 /* NameView.swift */,
 				51E83AFC2C4741600066F4C6 /* EmailView.swift */,
 				51E83AFE2C4743F00066F4C6 /* PasswordView.swift */,
+				51E83B002C47451A0066F4C6 /* HCActionButton.swift */,
 			);
 			path = subview;
 			sourceTree = "<group>";
@@ -296,6 +299,7 @@
 				51E83AFF2C4743F00066F4C6 /* PasswordView.swift in Sources */,
 				51E83AF62C45A2580066F4C6 /* RegistrationObject.swift in Sources */,
 				51E83AF42C459A2D0066F4C6 /* ApiContant.swift in Sources */,
+				51E83B012C47451A0066F4C6 /* HCActionButton.swift in Sources */,
 				51701FEE2C446C3C009ED8D1 /* Enums.swift in Sources */,
 				51C66A732C4306E000FF3DC6 /* DrugGroup.swift in Sources */,
 				51701FF02C4482FE009ED8D1 /* LoginObject.swift in Sources */,

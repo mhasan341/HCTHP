@@ -20,8 +20,8 @@ struct EmailView: View {
             .textContentType(.emailAddress)
             .keyboardType(.emailAddress)
             .focused($focusedField, equals: .email)
-            .onValidate{ name in
-                return authVM.validateEmail(name)
+            .onValidate{ email in
+                return authVM.validateEmail(email)
             }
             .onSubmit {
                 focusedField = .password
