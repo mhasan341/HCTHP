@@ -12,8 +12,6 @@ struct OnboardingView: View {
     @State private var logoScale: CGFloat = 2.4
     @State private var buttonsVisible = false
 
-    @StateObject private var authVM = AuthVM()
-
     var body: some View {
 
         NavigationStack {
@@ -40,7 +38,6 @@ struct OnboardingView: View {
                 // Takes user to registration view
                 NavigationLink(destination: 
                                 RegistrationView()
-                                        .environmentObject(authVM)
                 ) {
                     Text("Create New Account")
                         .font(.headline)

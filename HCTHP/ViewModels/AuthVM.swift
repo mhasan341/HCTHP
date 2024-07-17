@@ -9,7 +9,8 @@ import Foundation
 import Combine
 
 class AuthVM: ObservableObject {
-
+    /// Determines whether or not current user is logged in
+    @Published var isLoggedIn = false
     /// Indicates if the request to server is running or returned and stopped
     @Published var isLoading = false
 
@@ -54,7 +55,9 @@ class AuthVM: ObservableObject {
         }
 
         // since our data is already sanitized, we'd want the loader to show now
-        isLoading = true
+        DispatchQueue.main.async {
+            self.isLoading = true
+        }
 
         var request = URLRequest(url: url)
         request.httpMethod = "POST"
@@ -62,8 +65,10 @@ class AuthVM: ObservableObject {
 
         let body: [String: String] = ["name": name, "email": email, "password": password]
         guard let bodyData = try? JSONSerialization.data(withJSONObject: body) else {
-            self.registrationError = "Please check your input"
-            self.isLoading = false
+            DispatchQueue.main.async {
+                self.registrationError = ValidationError.serverError.localizedDescription
+                self.isLoading = false
+            }
             return
         }
         request.httpBody = bodyData
@@ -73,15 +78,15 @@ class AuthVM: ObservableObject {
         let (data, _) = try await URLSession.shared.data(for: request)
         let response = try JSONDecoder().decode(RegistrationObject.self, from: data)
         #warning("Use the response")
-
         DispatchQueue.main.async {
             self.isLoading = false
-            self.loginError = nil
+            self.registrationError = nil
+            self.isLoggedIn = true
         }
     } catch {
         DispatchQueue.main.async {
             self.isLoading = false
-            self.loginError = error.localizedDescription
+            self.registrationError = error.localizedDescription
         }
     }
 
@@ -93,7 +98,9 @@ class AuthVM: ObservableObject {
             do {
                 // Create the URL
                 guard let url = URL(string: "\(ApiContant.baseAuthUrl)/login") else {
-                    self.loginError = "Invalid URL"
+                    DispatchQueue.main.async {
+                        self.loginError = "Invalid URL"
+                    }
                     return
                 }
 
@@ -107,8 +114,10 @@ class AuthVM: ObservableObject {
                 // Create the request body
                 let body: [String: String] = ["email": email, "password": password]
                 guard let bodyData = try? JSONSerialization.data(withJSONObject: body) else {
-                    self.loginError = "Invalid request body"
-                    isLoading = false
+                    DispatchQueue.main.async {
+                        self.loginError = "Invalid request body"
+                        self.isLoading = false
+                    }
                     return
                 }
                 request.httpBody = bodyData

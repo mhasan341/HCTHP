@@ -19,6 +19,7 @@ struct EmailView: View {
             .clearButtonHidden()
             .textContentType(.emailAddress)
             .keyboardType(.emailAddress)
+            .textInputAutocapitalization(.never)
             .focused($focusedField, equals: .email)
             .onValidate{ email in
                 return authVM.validateEmail(email)

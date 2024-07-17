@@ -18,8 +18,8 @@ struct RegistrationView: View {
     @State private var password: String = ""
 
     @State private var emailError = ""
-    @State private var isAlertShowing = false
 
+    @State private var isErrorAlertShowing = false
 
     // to move to next textfield
     @FocusState private var focusedField: RegistrationFields?
@@ -75,20 +75,19 @@ struct RegistrationView: View {
         // To track errors
         .onChange(of: authVM.detailedErrors) { oldValue, newValue in
             self.emailError = newValue["email", default: ""]
-            self.isAlertShowing = true
+            self.isErrorAlertShowing = true
         }
         .onAppear {
             // resetting it for a new session in case previous data present
             authVM.detailedErrors = [:]
         }
         // to show any alert related to email that came from server
-        .alert(self.emailError, isPresented: $isAlertShowing) {
+        .alert(self.emailError, isPresented: $isErrorAlertShowing) {
             Button {
-                isAlertShowing.toggle()
+                isErrorAlertShowing.toggle()
             } label: {
                 Text("Dismiss")
             }
-
         }
 
 
