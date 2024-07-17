@@ -13,21 +13,26 @@ class AuthVM: ObservableObject {
     /// Indicates if the request to server is running or returned and stopped
     @Published var isLoading = false
 
-    // Error releated to signup and login will be published here
+    /// Error releated to signup and login will be published here
     @Published var loginError: String?
 
-    // this will store multiple errors if there are any, used in registrationView
+    /// errors during registration process will be emitted
     @Published var detailedErrors: [String: String] = [:]
 
     // to store the combine cancellables
     private var cancellables = Set<AnyCancellable>()
 
+    /// Emits the name string that needs to be validated.
     private let nameSubject = PassthroughSubject<String, Never>()
-    @Published var nameValidationResult: Result<Bool, ValidationError>?
+    /// Emits the email that needs to be validated
+    private let emailSubject = PassthroughSubject<String, Never>()
 
+    /// Published to update the view with the latest validation result.
+    @Published var nameValidationResult: Result<Bool, ValidationError>?
+    @Published var emailValidationResult: Result<Bool, ValidationError>?
 
     init() {
-        setupNameValidation()
+        setupValidations()
     }
 
 
@@ -143,12 +148,20 @@ class AuthVM: ObservableObject {
 
     //MARK: Name Validation
     // setting up the validation process of name field using Combine
-    private func setupNameValidation() {
+    private func setupValidations() {
         nameSubject
             .dropFirst() // to prevent error from showing when user just opened the screen
             .sink { [weak self] name in
                 guard let self = self else { return }
-                self.nameValidationResult = self.validateNamePublisher(name)
+                self.nameValidationResult = self.validateNameConditions(name)
+            }
+            .store(in: &cancellables)
+
+        emailSubject
+            .dropFirst() // Skip the first emitted value for email
+            .sink { [weak self] email in
+                guard let self = self else { return }
+                self.emailValidationResult = self.validateEmailConditions(email)
             }
             .store(in: &cancellables)
     }
@@ -159,8 +172,8 @@ class AuthVM: ObservableObject {
         return nameValidationResult ?? .success(true)
     }
 
-    /// takes the name and runs our predefined conditions on it
-    private func validateNamePublisher(_ name: String) -> Result<Bool, ValidationError> {
+    /// takes a name and runs our predefined conditions on it
+    private func validateNameConditions(_ name: String) -> Result<Bool, ValidationError> {
         if name.isEmpty {
             return .failure(ValidationError(message: "Name is required"))
         } else if name.count < 3 {
@@ -174,6 +187,31 @@ class AuthVM: ObservableObject {
 
 
     //MARK: Email Validation
+
+    /// validates the email and returns the result
+    func validateEmail(_ email: String) -> Result<Bool, ValidationError> {
+        emailSubject.send(email)
+        return emailValidationResult ?? .success(true)
+    }
+
+    /// takes an emal and runs our predefined conditions on it
+    private func validateEmailConditions(_ email: String) -> Result<Bool, ValidationError> {
+        if email.isEmpty {
+            return .failure(ValidationError(message: "Email is required"))
+        } else if !isValidEmail(email) {
+            return .failure(ValidationError(message: "Email is not valid"))
+        } else {
+            return .success(true)
+        }
+    }
+
+    /// Returns if the supplied email is valid
+    private func isValidEmail(_ email: String) -> Bool {
+        let emailRegEx = "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,64}"
+        let emailPredicate = NSPredicate(format:"SELF MATCHES %@", emailRegEx)
+        return emailPredicate.evaluate(with: email)
+    }
+
 
     //MARK: Password Validation
 }

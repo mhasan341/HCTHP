@@ -10,11 +10,12 @@ import IQKeyboardManagerSwift
 import Combine
 
 struct RegistrationView: View {
-    @StateObject private var authVM = AuthVM()
+    @EnvironmentObject var authVM: AuthVM
+
     // these will hold the values we'll send to server
     @State private var name: String = ""
-    @State private var email: String = "mahmudxx@housecall.ae"
-    @State private var password: String = "password"
+    @State private var email: String = ""
+    @State private var password: String = ""
 
     @State private var emailError = ""
     @State private var passwordError = ""
@@ -37,54 +38,11 @@ struct RegistrationView: View {
 
             VStack(alignment: .leading, spacing: 20) {
 
-                NameView(name: $name, focusedField: _focusedField, authVM: authVM)
+                NameView(name: $name, focusedField: _focusedField)
 
-                TextInputField("Email", text: $email)
-                    .submitLabel(.next)
-                    .clearButtonHidden()
-                    .textContentType(.emailAddress)
-                    .keyboardType(.emailAddress)
-                    .focused($focusedField, equals: .email)
-                    .onSubmit {
-                        focusedField = .password
-                    }
-                    .padding()
-                    .background(Color(.systemGray6))
-                    .cornerRadius(10)
-                    .overlay(
-                        RoundedRectangle(cornerRadius: 10)
-                            .stroke(Color(.systemGray4), lineWidth: 1)
-                    )
+                EmailView(email: $email, focusedField: _focusedField)
 
-                // Not using the system SecureField as we need the floating behavior
-                TextInputField("Create a password", text: $password)
-                    .clearButtonHidden()
-                    .submitLabel(.go)
-                    .focused($focusedField, equals: .password)
-                    .onSubmit {
-                        doRegistration()
-                    }
-                    .setTextFieldSecure(isSecure)
-                    .textContentType(.password)
-                    .padding()
-                    .background(Color(.systemGray6))
-                    .cornerRadius(10)
-                    .overlay(
-                        RoundedRectangle(cornerRadius: 10)
-                            .stroke(Color(.systemGray4), lineWidth: 1)
-                    )
-                    .overlay(
-                        HStack {
-                            Spacer()
-                            Button(action: {
-                                isSecure.toggle()
-                            }) {
-                                Image(systemName: self.isSecure ? "eye.slash" : "eye")
-                                    .foregroundColor(.gray)
-                            }
-                            .padding(.trailing, 10)
-                        }
-                    )
+                
             }
             .padding(.horizontal, 20)
             .padding(.top, 40)
@@ -131,6 +89,10 @@ struct RegistrationView: View {
                 }
             }
 
+        }
+        .onAppear {
+            // resetting it for a new session in case previous data present
+            authVM.detailedErrors = [:]
         }
 
 

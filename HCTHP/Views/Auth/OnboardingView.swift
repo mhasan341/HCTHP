@@ -12,6 +12,8 @@ struct OnboardingView: View {
     @State private var logoScale: CGFloat = 2.4
     @State private var buttonsVisible = false
 
+    @StateObject private var authVM = AuthVM()
+
     var body: some View {
 
         NavigationStack {
@@ -59,6 +61,7 @@ struct OnboardingView: View {
 
             } // VStack
             .toolbar(.hidden, for: .navigationBar)
+            .environmentObject(authVM)
         }
 
     }

@@ -1,5 +1,5 @@
 //
-//  NameView.swift
+//  EmailView.swift
 //  HCTHP
 //
 //  Created by Mahmudul Hasan on 2024-07-17.
@@ -7,23 +7,24 @@
 
 import SwiftUI
 
-struct NameView: View {
-
-    @Binding var name: String
+struct EmailView: View {
+    
+    @Binding var email: String
     @FocusState var focusedField: RegistrationFields?
     @EnvironmentObject var authVM: AuthVM
 
-
     var body: some View {
-        TextInputField("Name", text: $name)
+        TextInputField("Email", text: $email)
             .submitLabel(.next)
             .clearButtonHidden()
-            .focused($focusedField, equals: .name)
+            .textContentType(.emailAddress)
+            .keyboardType(.emailAddress)
+            .focused($focusedField, equals: .email)
             .onValidate{ name in
-                return authVM.validateName(name)
+                return authVM.validateEmail(name)
             }
             .onSubmit {
-                focusedField = .email
+                focusedField = .password
             }
             .padding()
             .background(Color(.systemGray6))
@@ -33,5 +34,4 @@ struct NameView: View {
                     .stroke(Color(.systemGray4), lineWidth: 1)
             )
     }
-
 }

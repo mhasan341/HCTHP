@@ -27,6 +27,8 @@
 		51E83AF62C45A2580066F4C6 /* RegistrationObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51E83AF52C45A2580066F4C6 /* RegistrationObject.swift */; };
 		51E83AF82C46EB770066F4C6 /* UINavigationController+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51E83AF72C46EB770066F4C6 /* UINavigationController+Ext.swift */; };
 		51E83AFB2C47265B0066F4C6 /* NameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51E83AFA2C47265B0066F4C6 /* NameView.swift */; };
+		51E83AFD2C4741600066F4C6 /* EmailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51E83AFC2C4741600066F4C6 /* EmailView.swift */; };
+		51E83AFF2C4743F00066F4C6 /* PasswordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51E83AFE2C4743F00066F4C6 /* PasswordView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -52,6 +54,8 @@
 		51E83AF52C45A2580066F4C6 /* RegistrationObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationObject.swift; sourceTree = "<group>"; };
 		51E83AF72C46EB770066F4C6 /* UINavigationController+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UINavigationController+Ext.swift"; sourceTree = "<group>"; };
 		51E83AFA2C47265B0066F4C6 /* NameView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NameView.swift; sourceTree = "<group>"; };
+		51E83AFC2C4741600066F4C6 /* EmailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmailView.swift; sourceTree = "<group>"; };
+		51E83AFE2C4743F00066F4C6 /* PasswordView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -194,6 +198,8 @@
 			isa = PBXGroup;
 			children = (
 				51E83AFA2C47265B0066F4C6 /* NameView.swift */,
+				51E83AFC2C4741600066F4C6 /* EmailView.swift */,
+				51E83AFE2C4743F00066F4C6 /* PasswordView.swift */,
 			);
 			path = subview;
 			sourceTree = "<group>";
@@ -285,7 +291,9 @@
 				51701FDE2C440B68009ED8D1 /* OnboardingView.swift in Sources */,
 				51701FE72C444908009ED8D1 /* TextInputField.swift in Sources */,
 				51C66A752C4306FD00FF3DC6 /* ConceptGroup.swift in Sources */,
+				51E83AFD2C4741600066F4C6 /* EmailView.swift in Sources */,
 				51701FE22C440B80009ED8D1 /* LoginView.swift in Sources */,
+				51E83AFF2C4743F00066F4C6 /* PasswordView.swift in Sources */,
 				51E83AF62C45A2580066F4C6 /* RegistrationObject.swift in Sources */,
 				51E83AF42C459A2D0066F4C6 /* ApiContant.swift in Sources */,
 				51701FEE2C446C3C009ED8D1 /* Enums.swift in Sources */,
