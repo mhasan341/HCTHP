@@ -25,7 +25,8 @@ struct OnboardingView: View {
                     .frame(width: 150, height: 150)
                     .scaleEffect(logoScale)
                     .onAppear {
-                        withAnimation(Animation.spring(duration: 1.5).repeatCount(1)) {
+
+                        withAnimation(Animation.spring(duration: 1.6).repeatCount(1).delay(0.1)) {
                             logoScale = 1.0
                             buttonsVisible = true
                         }

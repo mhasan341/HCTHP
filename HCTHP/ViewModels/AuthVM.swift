@@ -13,8 +13,11 @@ class AuthVM: ObservableObject {
     /// Indicates if the request to server is running or returned and stopped
     @Published var isLoading = false
 
-    /// Error releated to signup and login will be published here
+    /// Error releated to login will be published here
     @Published var loginError: String?
+
+    /// Error releated to registration will be published here
+    @Published var registrationError: String?
 
     /// errors during registration process will be emitted
     @Published var detailedErrors: [String: String] = [:]
@@ -39,12 +42,13 @@ class AuthVM: ObservableObject {
     }
 
 
-    /// Creates an account for the user in the backend using combine framework
-    func signUp(name: String, email: String, password: String) {
+    /// Creates an account for the user in the backend
+    func signUp(name: String, email: String, password: String) async {
 
+        do {
         // From RegistrationView, we'd make sure that the name, email and password is valid already
         // So we're not checking that here
-        guard let url = URL(string: "\(ApiContant.baseURL)/register") else {
+        guard let url = URL(string: "\(ApiContant.baseAuthUrl)/register") else {
             // we don't need to throw an error here
             return
         }
@@ -58,50 +62,28 @@ class AuthVM: ObservableObject {
 
         let body: [String: String] = ["name": name, "email": email, "password": password]
         guard let bodyData = try? JSONSerialization.data(withJSONObject: body) else {
-            // we don't need to throw an error here
+            self.registrationError = "Please check your input"
             self.isLoading = false
             return
         }
         request.httpBody = bodyData
 
-        // start the process
-        URLSession.shared.dataTaskPublisher(for: request)
-            .tryMap { output in
-                guard let response = output.response as? HTTPURLResponse, response.statusCode == 200 else {
-                    throw URLError(.badServerResponse)
-                }
 
-                return output.data
-            }
-            .decode(type: RegistrationObject.self, decoder: JSONDecoder())
-            .receive(on: DispatchQueue.main)
-            .sink(receiveCompletion: { completion in
-                // stop the flag
-                self.isLoading = false
-                switch completion {
-                    case .failure(_):
-                        print("Failure")
-                    case .finished:
-                        print("Success")
-                        break
-                }
-            }, receiveValue: { response in
-                // to make sure the loading is stopped
-                self.isLoading = false
-                // if the user could register we have the token
-                if response.status {
-                    #warning("Use the token now")
-                    self.detailedErrors = [:]
-                } else {
-                    // not everytime there will be a list of errors
-                    if let errors = response.errors {
-                        self.detailedErrors = errors.allErrors()
-                    } else {
-                        self.detailedErrors = [:]
-                    }
-                }
-            })
-            .store(in: &self.cancellables)
+        // Perform the network request
+        let (data, _) = try await URLSession.shared.data(for: request)
+        let response = try JSONDecoder().decode(RegistrationObject.self, from: data)
+        #warning("Use the response")
+
+        DispatchQueue.main.async {
+            self.isLoading = false
+            self.loginError = nil
+        }
+    } catch {
+        DispatchQueue.main.async {
+            self.isLoading = false
+            self.loginError = error.localizedDescription
+        }
+    }
 
     }
 
@@ -110,7 +92,7 @@ class AuthVM: ObservableObject {
 
             do {
                 // Create the URL
-                guard let url = URL(string: "\(ApiContant.baseURL)/login") else {
+                guard let url = URL(string: "\(ApiContant.baseAuthUrl)/login") else {
                     self.loginError = "Invalid URL"
                     return
                 }
@@ -189,11 +171,11 @@ class AuthVM: ObservableObject {
     /// takes a name and runs our predefined conditions on it
     private func validateNameConditions(_ name: String) -> Result<Bool, ValidationError> {
         if name.isEmpty {
-            return .failure(ValidationError(message: "Name is required"))
+            return .failure(.nameRequired)
         } else if name.count < 3 {
-            return .failure(ValidationError(message: "Name must be at least 3 characters long"))
+            return .failure(.nameTooShort)
         } else if name.count > 255 {
-            return .failure(ValidationError(message: "Name must be less than 256 characters long"))
+            return .failure(.nameTooLong)
         } else {
             return .success(true)
         }
@@ -211,9 +193,9 @@ class AuthVM: ObservableObject {
     /// takes an emal and runs our predefined conditions on it
     private func validateEmailConditions(_ email: String) -> Result<Bool, ValidationError> {
         if email.isEmpty {
-            return .failure(ValidationError(message: "Email is required"))
+            return .failure(.emailRequired)
         } else if !isValidEmail(email) {
-            return .failure(ValidationError(message: "Email is not valid"))
+            return .failure(.emailInvalid)
         } else {
             return .success(true)
         }
@@ -238,9 +220,9 @@ class AuthVM: ObservableObject {
     /// takes a password and runs our predefined conditions on it
     private func validatePasswordConditions(_ password: String)-> Result<Bool, ValidationError> {
         if password.isEmpty {
-            return .failure(ValidationError(message: "Password is required"))
+            return .failure(.passwordRequired)
         } else if password.count < 8 {
-            return .failure(ValidationError(message: "Password must be at least 8 characters long"))
+            return .failure(.passwordTooShort)
         } else {
             return .success(true)
         }
@@ -257,6 +239,20 @@ class AuthVM: ObservableObject {
         } else {
             return true
         }
+    }
+
+    /// returns if all input fields in login view is valid
+    func shouldDisableLoginButton()->Bool{
+        if case .success(let emailIsValid) = emailValidationResult, emailIsValid,
+           case .success(let passwordIsValid) = passwordValidationResult, passwordIsValid {
+            return false
+        } else {
+            return true
+        }
+    }
+
+    func logout(){
+        #warning("Do it later")
     }
 
 

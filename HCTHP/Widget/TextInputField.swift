@@ -176,20 +176,6 @@ extension EnvironmentValues {
 
 // MARK: - Validation Handler
 
-public struct ValidationError: Error {
-    let message: String
-
-    public init(message: String) {
-        self.message = message
-    }
-}
-
-extension ValidationError: LocalizedError {
-    public var errorDescription: String? {
-        return NSLocalizedString("\(message)", comment: "Message for generic validation errors.")
-    }
-}
-
 private struct TextInputFieldValidationHandler: EnvironmentKey {
     static var defaultValue: ((String) -> Result<Bool, ValidationError>)?
 }

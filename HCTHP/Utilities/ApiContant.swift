@@ -8,5 +8,6 @@
 import Foundation
 
 struct ApiContant {
-    static let baseURL = "https://hcthp.premiercode.pro/api"
+    static let baseAuthUrl = "https://hcthp.premiercode.pro/api"
+    static let baseUrl = "https://hcthp.premiercode.pro/api/v1"
 }

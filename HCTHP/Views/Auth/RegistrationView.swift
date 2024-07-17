@@ -18,7 +18,7 @@ struct RegistrationView: View {
     @State private var password: String = ""
 
     @State private var emailError = ""
-    @State private var passwordError = ""
+    @State private var isAlertShowing = false
 
 
     // to move to next textfield
@@ -74,28 +74,27 @@ struct RegistrationView: View {
         .navigationBarBackButtonHidden()
         // To track errors
         .onChange(of: authVM.detailedErrors) { oldValue, newValue in
-
-            #warning("Show an alert")
-            for key in newValue.keys {
-                switch key {
-                    case "email":
-                        self.emailError = newValue["email", default: ""]
-                    default:
-                        // we don't have to use this
-                        print("No more errors!")
-                }
-            }
-
+            self.emailError = newValue["email", default: ""]
+            self.isAlertShowing = true
         }
         .onAppear {
             // resetting it for a new session in case previous data present
             authVM.detailedErrors = [:]
         }
+        // to show any alert related to email that came from server
+        .alert(self.emailError, isPresented: $isAlertShowing) {
+            Button {
+                isAlertShowing.toggle()
+            } label: {
+                Text("Dismiss")
+            }
+
+        }
 
 
     } // body
 
-    private func doRegistration(){
+    private func doRegistration() {
         // hide the keyboard if present
         IQKeyboardManager.shared.resignFirstResponder()
 
@@ -103,12 +102,11 @@ struct RegistrationView: View {
         // But we need to control the action button
 
         // calls the authVM
-        authVM.signUp(name: name, email: email, password: password)
+        Task {
+            await authVM.signUp(name: name, email: email, password: password)
+        }
+
     }
 
     
-}
-
-#Preview {
-    RegistrationView()
 }
