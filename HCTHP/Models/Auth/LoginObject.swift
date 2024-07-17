@@ -11,7 +11,7 @@ import Foundation
 struct LoginObject: Codable {
     let status: Bool
     let message: String
-    let accessToken: String
+    let accessToken: String?
 
     // We could've used keyDecodingStrategy as well
     enum CodingKeys: String, CodingKey {

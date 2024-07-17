@@ -42,7 +42,9 @@ struct RegistrationView: View {
                 EmailView(email: $email, focusedField: _focusedField)
                 // for the password input
                 PasswordView(password: $password, focusedField: _focusedField) {
-                    doRegistration()
+                    if !authVM.shouldDisableRegistrationButton() {
+                        doRegistration()
+                    }
                 }
 
             }
@@ -80,6 +82,9 @@ struct RegistrationView: View {
         .onAppear {
             // resetting it for a new session in case previous data present
             authVM.detailedErrors = [:]
+            authVM.emailValidationResult = nil
+            authVM.passwordValidationResult = nil
+            authVM.nameValidationResult = nil
         }
         // to show any alert related to email that came from server
         .alert(self.emailError, isPresented: $isErrorAlertShowing) {
@@ -96,7 +101,6 @@ struct RegistrationView: View {
     private func doRegistration() {
         // hide the keyboard if present
         IQKeyboardManager.shared.resignFirstResponder()
-
         // The validation for name, email and password will show the errors where required
         // But we need to control the action button
 

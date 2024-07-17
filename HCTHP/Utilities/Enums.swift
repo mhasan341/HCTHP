@@ -57,3 +57,8 @@ public enum ValidationError: Error, Identifiable {
         }
     }
 }
+
+enum Keys {
+    static let AUTH_TOKEN = "token"
+    static let GENERIC_ERROR = "An error occured"
+}

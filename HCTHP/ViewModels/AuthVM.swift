@@ -5,10 +5,11 @@
 //  Created by Mahmudul Hasan on 2024-07-14.
 //
 
-import Foundation
+import SwiftUI
 import Combine
 
 class AuthVM: ObservableObject {
+    @AppStorage(Keys.AUTH_TOKEN) var authToken: String = ""
     /// Determines whether or not current user is logged in
     @Published var isLoggedIn = false
     /// Indicates if the request to server is running or returned and stopped
@@ -66,7 +67,7 @@ class AuthVM: ObservableObject {
         let body: [String: String] = ["name": name, "email": email, "password": password]
         guard let bodyData = try? JSONSerialization.data(withJSONObject: body) else {
             DispatchQueue.main.async {
-                self.registrationError = ValidationError.serverError.localizedDescription
+                self.registrationError = ValidationError.clientError.localizedDescription
                 self.isLoading = false
             }
             return
@@ -77,11 +78,16 @@ class AuthVM: ObservableObject {
         // Perform the network request
         let (data, _) = try await URLSession.shared.data(for: request)
         let response = try JSONDecoder().decode(RegistrationObject.self, from: data)
-        #warning("Use the response")
+
         DispatchQueue.main.async {
-            self.isLoading = false
-            self.registrationError = nil
-            self.isLoggedIn = true
+
+                self.isLoading = false
+                self.registrationError = nil
+                guard let token = response.access_token else {return}
+                self.authToken = token
+                self.isLoggedIn = true
+
+
         }
     } catch {
         DispatchQueue.main.async {
@@ -98,13 +104,12 @@ class AuthVM: ObservableObject {
             do {
                 // Create the URL
                 guard let url = URL(string: "\(ApiContant.baseAuthUrl)/login") else {
-                    DispatchQueue.main.async {
-                        self.loginError = "Invalid URL"
-                    }
                     return
                 }
 
-                isLoading = true
+                DispatchQueue.main.async {
+                    self.isLoading = true
+                }
 
                 // Create the URL request
                 var request = URLRequest(url: url)
@@ -115,7 +120,7 @@ class AuthVM: ObservableObject {
                 let body: [String: String] = ["email": email, "password": password]
                 guard let bodyData = try? JSONSerialization.data(withJSONObject: body) else {
                     DispatchQueue.main.async {
-                        self.loginError = "Invalid request body"
+                        self.loginError = ValidationError.clientError.localizedDescription
                         self.isLoading = false
                     }
                     return
@@ -126,14 +131,24 @@ class AuthVM: ObservableObject {
                 let (data, _) = try await URLSession.shared.data(for: request)
                 let response = try JSONDecoder().decode(LoginObject.self, from: data)
 
-                #warning("Use the response")
-
                 DispatchQueue.main.async {
-                    self.isLoading = false
-                    self.loginError = nil
+
+                    if response.status {
+                        self.isLoading = false
+                        self.loginError = nil
+                        guard let token = response.accessToken else {return}
+                        self.authToken = token
+                        self.isLoggedIn = true
+                    } else {
+                        self.isLoading = false
+                        self.loginError = response.message
+                        self.isLoggedIn = false
+                    }
+
                 }
             } catch {
                 DispatchQueue.main.async {
+                    print("Error Catched")
                     self.isLoading = false
                     self.loginError = error.localizedDescription
                 }
@@ -261,7 +276,7 @@ class AuthVM: ObservableObject {
     }
 
     func logout(){
-        #warning("Do it later")
+        isLoggedIn = false
     }
 
 

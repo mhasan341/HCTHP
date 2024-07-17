@@ -23,7 +23,7 @@ struct HCActionButton: View {
                 .foregroundColor(.white)
                 .frame(maxWidth: .infinity)
                 .padding()
-                .background(authVM.shouldDisableRegistrationButton() ? .gray : .blue)
+                .background(authVM.shouldDisableLoginButton() ? .gray : .blue)
                 .cornerRadius(10)
                 .padding(.horizontal, 20)
                 .padding(.top, 40)
