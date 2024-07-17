@@ -11,7 +11,8 @@ import Combine
 class AuthVM: ObservableObject {
     @AppStorage(Keys.AUTH_TOKEN) var authToken: String = ""
     /// Determines whether or not current user is logged in
-    @Published var isLoggedIn = false
+    @Published var isLoggedIn = true
+#warning("Change it")
     /// Indicates if the request to server is running or returned and stopped
     @Published var isLoading = false
 
