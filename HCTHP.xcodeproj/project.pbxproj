@@ -18,7 +18,7 @@
 		5170922C2C418F4A00C2AFA7 /* HCTHPApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5170922B2C418F4A00C2AFA7 /* HCTHPApp.swift */; };
 		517092302C418F4C00C2AFA7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5170922F2C418F4C00C2AFA7 /* Assets.xcassets */; };
 		517092332C418F4C00C2AFA7 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 517092322C418F4C00C2AFA7 /* Preview Assets.xcassets */; };
-		51C66A772C43071200FF3DC6 /* ConceptProperty.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51C66A762C43071200FF3DC6 /* ConceptProperty.swift */; };
+		51C66A772C43071200FF3DC6 /* Drug.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51C66A762C43071200FF3DC6 /* Drug.swift */; };
 		51C66A792C43082F00FF3DC6 /* AuthVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51C66A782C43082F00FF3DC6 /* AuthVM.swift */; };
 		51C66A7B2C43085200FF3DC6 /* DrugVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51C66A7A2C43085200FF3DC6 /* DrugVM.swift */; };
 		51E83AF42C459A2D0066F4C6 /* ApiContant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51E83AF32C459A2D0066F4C6 /* ApiContant.swift */; };
@@ -30,7 +30,7 @@
 		51E83B012C47451A0066F4C6 /* HCActionButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51E83B002C47451A0066F4C6 /* HCActionButton.swift */; };
 		51E83B032C476ADB0066F4C6 /* MedicationHome.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51E83B022C476ADB0066F4C6 /* MedicationHome.swift */; };
 		51E83B052C476B0C0066F4C6 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51E83B042C476B0C0066F4C6 /* ContentView.swift */; };
-		51E83B072C4786020066F4C6 /* DrugDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51E83B062C4786020066F4C6 /* DrugDetail.swift */; };
+		51E83B092C4792450066F4C6 /* MedicationItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51E83B082C4792450066F4C6 /* MedicationItem.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -46,7 +46,7 @@
 		5170922F2C418F4C00C2AFA7 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		517092322C418F4C00C2AFA7 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		517092342C418F4C00C2AFA7 /* HCTHP.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = HCTHP.entitlements; sourceTree = "<group>"; };
-		51C66A762C43071200FF3DC6 /* ConceptProperty.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConceptProperty.swift; sourceTree = "<group>"; };
+		51C66A762C43071200FF3DC6 /* Drug.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Drug.swift; sourceTree = "<group>"; };
 		51C66A782C43082F00FF3DC6 /* AuthVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthVM.swift; sourceTree = "<group>"; };
 		51C66A7A2C43085200FF3DC6 /* DrugVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrugVM.swift; sourceTree = "<group>"; };
 		51C66A7C2C431AB800FF3DC6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
@@ -59,7 +59,7 @@
 		51E83B002C47451A0066F4C6 /* HCActionButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HCActionButton.swift; sourceTree = "<group>"; };
 		51E83B022C476ADB0066F4C6 /* MedicationHome.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MedicationHome.swift; sourceTree = "<group>"; };
 		51E83B042C476B0C0066F4C6 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
-		51E83B062C4786020066F4C6 /* DrugDetail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrugDetail.swift; sourceTree = "<group>"; };
+		51E83B082C4792450066F4C6 /* MedicationItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MedicationItem.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -77,8 +77,8 @@
 		51701FE52C4448D2009ED8D1 /* Widget */ = {
 			isa = PBXGroup;
 			children = (
-				51E83AF92C4726440066F4C6 /* subview */,
 				51701FE62C444908009ED8D1 /* TextInputField.swift */,
+				51E83AF92C4726440066F4C6 /* subview */,
 			);
 			path = Widget;
 			sourceTree = "<group>";
@@ -139,8 +139,7 @@
 			isa = PBXGroup;
 			children = (
 				51701FF12C448315009ED8D1 /* Auth */,
-				51C66A762C43071200FF3DC6 /* ConceptProperty.swift */,
-				51E83B062C4786020066F4C6 /* DrugDetail.swift */,
+				51C66A762C43071200FF3DC6 /* Drug.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -202,12 +201,29 @@
 		51E83AF92C4726440066F4C6 /* subview */ = {
 			isa = PBXGroup;
 			children = (
+				51E83B0B2C47939B0066F4C6 /* button */,
+				51E83B0A2C4793700066F4C6 /* textfield */,
+				51E83B082C4792450066F4C6 /* MedicationItem.swift */,
+			);
+			path = subview;
+			sourceTree = "<group>";
+		};
+		51E83B0A2C4793700066F4C6 /* textfield */ = {
+			isa = PBXGroup;
+			children = (
 				51E83AFA2C47265B0066F4C6 /* NameView.swift */,
 				51E83AFC2C4741600066F4C6 /* EmailView.swift */,
 				51E83AFE2C4743F00066F4C6 /* PasswordView.swift */,
+			);
+			path = textfield;
+			sourceTree = "<group>";
+		};
+		51E83B0B2C47939B0066F4C6 /* button */ = {
+			isa = PBXGroup;
+			children = (
 				51E83B002C47451A0066F4C6 /* HCActionButton.swift */,
 			);
-			path = subview;
+			path = button;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -287,12 +303,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				51701FEC2C446A2C009ED8D1 /* AppDelegate.swift in Sources */,
+				51E83B092C4792450066F4C6 /* MedicationItem.swift in Sources */,
 				51C66A792C43082F00FF3DC6 /* AuthVM.swift in Sources */,
 				51E83AF82C46EB770066F4C6 /* UINavigationController+Ext.swift in Sources */,
 				51C66A7B2C43085200FF3DC6 /* DrugVM.swift in Sources */,
 				51701FE02C440B7A009ED8D1 /* RegistrationView.swift in Sources */,
-				51C66A772C43071200FF3DC6 /* ConceptProperty.swift in Sources */,
-				51E83B072C4786020066F4C6 /* DrugDetail.swift in Sources */,
+				51C66A772C43071200FF3DC6 /* Drug.swift in Sources */,
 				51E83AFB2C47265B0066F4C6 /* NameView.swift in Sources */,
 				5170922C2C418F4A00C2AFA7 /* HCTHPApp.swift in Sources */,
 				51701FDE2C440B68009ED8D1 /* OnboardingView.swift in Sources */,

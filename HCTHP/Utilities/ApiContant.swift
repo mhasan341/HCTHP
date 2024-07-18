@@ -8,7 +8,9 @@
 import Foundation
 
 struct ApiContant {
-    static let nih_baseUrl = "https://rxnav.nlm.nih.gov/REST/drugs.json?name="
-    static let baseAuthUrl = "https://hcthp.premiercode.pro/api"
+    static let basePublicUrl = "https://hcthp.premiercode.pro/api"
     static let baseUrl = "https://hcthp.premiercode.pro/api/v1"
+
+    static let getUserSavedDrugs = "http://hcthp.premiercode.pro/api/v1/drugs"
+    static let deleteUserSavedDrugsWithId = "http://hcthp.premiercode.pro/api/v1/drugs/{id}"
 }
