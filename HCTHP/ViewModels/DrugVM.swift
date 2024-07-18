@@ -5,10 +5,12 @@
 //  Created by Mahmudul Hasan on 2024-07-14.
 //
 
-import Foundation
+import SwiftUI
 import Combine
 
 class DrugVM: ObservableObject {
+
+    @AppStorage(Keys.AUTH_TOKEN) var authToken: String = ""
 
     @Published var isLoading = false
     @Published var searchResult: [DrugRowItem] = []
@@ -42,7 +44,6 @@ class DrugVM: ObservableObject {
                 // success here
                 self.isLoading = false
                 self.searchResult = response
-
             }
         } catch(let error) {
             DispatchQueue.main.async {
@@ -73,6 +74,7 @@ class DrugVM: ObservableObject {
             var request = URLRequest(url: url)
             request.httpMethod = "GET"
             request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+            request.setValue("Bearer \(authToken)", forHTTPHeaderField: "Authorization")
 
             // Perform the network request
             let (data, _) = try await URLSession.shared.data(for: request)
