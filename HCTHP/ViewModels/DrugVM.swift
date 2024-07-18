@@ -23,7 +23,7 @@ class DrugVM: ObservableObject {
     }
 
     func getUserDrugs() {
-
+        
     }
 
     func deleteDrug(drugId: String) {

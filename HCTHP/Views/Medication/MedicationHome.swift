@@ -9,7 +9,16 @@ import SwiftUI
 
 struct MedicationHome: View {
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        NavigationStack {
+            List(0..<4) {_ in
+                MedicationItem(medineName: "Hello Medicine")
+            }
+            .refreshable {
+                print("Refreshing")
+            }
+            .navigationTitle("My Medications")
+        }
+
     }
 }
 
