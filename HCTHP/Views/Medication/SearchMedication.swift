@@ -14,32 +14,34 @@ struct SearchMedication: View {
 
     var body: some View {
         NavigationStack {
-            if let searchResult = drugVM.searchResult, let resultData = searchResult.data {
-                List(resultData) { item in
-                    MedicationItem(medineName: item.name)
-                }
-                .toolbar {
-                    ToolbarItem (placement: .topBarLeading) {
-                        Label("Back", systemImage: "chevron.backward")
-                            .labelStyle(.titleAndIcon)
-                            .foregroundStyle(.accent)
-                            .onTapGesture {
-                                sheetShowing = false
-                            }
+            VStack {
+                if let searchResult = drugVM.searchResult, let resultData = searchResult.data {
+                    List(resultData) { item in
+                        MedicationItem(medineName: item.name)
                     }
                 }
-            }
 
-
-            if let error = drugVM.errorMessage, !error.isEmpty {
-                ContentUnavailableView("Opps!" , image: "drug_icon", description: Text(error))
+                if let error = drugVM.errorMessage, !error.isEmpty {
+                    ContentUnavailableView("Opps!" , image: "drug_icon", description: Text(error))
+                }
             }
+            .toolbar {
+                ToolbarItem (placement: .topBarLeading) {
+                    Label("Back", systemImage: "chevron.backward")
+                        .labelStyle(.titleAndIcon)
+                        .foregroundStyle(.accent)
+                        .onTapGesture {
+                            sheetShowing = false
+                        }
+                }
+            }
+            .navigationTitle("Search Medications")
+            .navigationBarTitleDisplayMode(.inline)
         }
-
         .refreshable {
             searchDB()
         }
-        .searchable(text: $searchQuery, placement: .toolbar, prompt: "Search drugs")
+        .searchable(text: $searchQuery, placement: .navigationBarDrawer(displayMode: .always), prompt: "Search Medications")
         .onSubmit(of: .search) {
             searchDB()
         }
@@ -48,9 +50,6 @@ struct SearchMedication: View {
 
             }
         })
-        .navigationTitle("Search Medications")
-
-
     }
     
     private func searchDB(){
