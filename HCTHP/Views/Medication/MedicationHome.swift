@@ -8,20 +8,30 @@
 import SwiftUI
 
 struct MedicationHome: View {
+    @StateObject private var drugVM = DrugVM()
+    
+
     var body: some View {
         NavigationStack {
-            List(0..<4) {_ in
-                MedicationItem(medineName: "Hello Medicine")
+            if let userDrugs = drugVM.savedDrugs {
+                List(userDrugs.data) { item in
+                    MedicationItem(medineName: item.name)
+                }
+                .refreshable {
+                    Task {
+                        await drugVM.getUserDrugs()
+                    }
+
+                }
+                .navigationTitle("My Medications")
+            } else {
+                ContentUnavailableView("Sorry we couldn't find any saved drug", image: "drug", description: nil)
             }
-            .refreshable {
-                print("Refreshing")
-            }
-            .navigationTitle("My Medications")
+
+
         }
-
+        
     }
-}
 
-#Preview {
-    MedicationHome()
+    
 }
