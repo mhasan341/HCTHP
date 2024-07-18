@@ -14,13 +14,18 @@ struct MedicationHome: View {
     var body: some View {
         NavigationStack {
             VStack {
-                if let userDrugs = drugVM.savedDrugs {
-                    List(userDrugs.data) { item in
-                            MedicationItem(medineName: item.name)
-                        }
+                if !drugVM.isLoading && !drugVM.savedDrugs.isEmpty {
+                    List(drugVM.savedDrugs ) { item in
+                        MedicationItem(medineName: item.name)
+                            .swipeActions(edge: /*@START_MENU_TOKEN@*/.trailing/*@END_MENU_TOKEN@*/, allowsFullSwipe: /*@START_MENU_TOKEN@*/true/*@END_MENU_TOKEN@*/){
+                                Button("Delete"){
+                                    drugVM.deleteDrug(drugId: item.id)
+                                }
+                            }.tint(.red)
+                    }
 
-                } else{
-                        ContentUnavailableView("Sorry we couldn't find any saved drug", image: "drug_icon", description: nil)
+                } else {
+                        ContentUnavailableView("You don't have any medications to show", image: "drug_icon", description: nil)
                 }
 
                // Spacer()

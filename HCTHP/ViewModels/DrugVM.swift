@@ -14,7 +14,7 @@ class DrugVM: ObservableObject {
 
     @Published var isLoading = false
     @Published var searchResult: DrugRowItem?
-    @Published var savedDrugs: DrugSavedItem?
+    @Published var savedDrugs: [DrugRowData] = []
 
     @Published var errorMessage: String?
 
@@ -91,7 +91,7 @@ class DrugVM: ObservableObject {
             DispatchQueue.main.async {
                 // success here
                 self.isLoading = false
-                self.savedDrugs = response
+                self.savedDrugs = response.data
 
             }
         } catch(let error) {
@@ -103,6 +103,9 @@ class DrugVM: ObservableObject {
     }
 
     func deleteDrug(drugId: String) {
-
+        let index = savedDrugs.firstIndex {$0.id == drugId}
+        if let index = index  {
+            savedDrugs.remove(at: index)
+        }
     }
 }

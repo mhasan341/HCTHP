@@ -8,6 +8,7 @@
 import Foundation
 
 class DrugSavedItem: Codable {
+    
     let status: Bool
-    let data: [DrugRowData]
+    var data: [DrugRowData]
 }
