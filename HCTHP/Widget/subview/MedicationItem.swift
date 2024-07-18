@@ -16,7 +16,7 @@ struct MedicationItem: View {
                 .frame(width: 32, height: 32)
 
             Text(medineName)
-                .font(.title2)
+                .font(.body)
         }.padding(.vertical, 5)
     }
 }

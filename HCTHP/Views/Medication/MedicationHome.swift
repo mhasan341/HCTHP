@@ -9,28 +9,44 @@ import SwiftUI
 
 struct MedicationHome: View {
     @StateObject private var drugVM = DrugVM()
-    
+    @State private var isSearchViewPresent = false
 
     var body: some View {
         NavigationStack {
-            if let userDrugs = drugVM.savedDrugs {
-                List(userDrugs.data) { item in
-                    MedicationItem(medineName: item.name)
-                }
-                .refreshable {
-                    Task {
-                        await drugVM.getUserDrugs()
-                    }
+            VStack {
+                if let userDrugs = drugVM.savedDrugs {
+                        List(userDrugs.data) { item in
+                            MedicationItem(medineName: item.name)
+                        }
 
+                } else{
+                        ContentUnavailableView("Sorry we couldn't find any saved drug", image: "drug_icon", description: nil)
                 }
-                .navigationTitle("My Medications")
-            } else {
-                ContentUnavailableView("Sorry we couldn't find any saved drug", image: "drug", description: nil)
+
+               // Spacer()
+                SearchMedicationButton {
+                    isSearchViewPresent = true
+                }
             }
 
+            .refreshable {
+                Task {
+                    await drugVM.getUserDrugs()
+                }
+
+            }
+            .navigationTitle("My Medications")
 
         }
-        
+        .sheet(isPresented: $isSearchViewPresent) {
+            SearchMedication(sheetShowing: $isSearchViewPresent)
+        }
+        .onAppear {
+            Task {
+                await drugVM.getUserDrugs()
+            }
+        }
+
     }
 
     
