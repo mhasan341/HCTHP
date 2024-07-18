@@ -14,18 +14,25 @@ struct SearchMedication: View {
 
     var body: some View {
         NavigationStack {
-            List(drugVM.searchResult) { item in
-                MedicationItem(medineName: item.name)
-            }
-            .toolbar {
-                ToolbarItem (placement: .topBarLeading) {
-                    Label("Back", systemImage: "chevron.backward")
-                        .labelStyle(.titleAndIcon)
-                        .foregroundStyle(.accent)
-                        .onTapGesture {
-                            sheetShowing = false
-                        }
+            if let searchResult = drugVM.searchResult, let resultData = searchResult.data {
+                List(resultData) { item in
+                    MedicationItem(medineName: item.name)
                 }
+                .toolbar {
+                    ToolbarItem (placement: .topBarLeading) {
+                        Label("Back", systemImage: "chevron.backward")
+                            .labelStyle(.titleAndIcon)
+                            .foregroundStyle(.accent)
+                            .onTapGesture {
+                                sheetShowing = false
+                            }
+                    }
+                }
+            }
+
+
+            if let error = drugVM.errorMessage, !error.isEmpty {
+                ContentUnavailableView("Opps!" , image: "drug_icon", description: Text(error))
             }
         }
 
@@ -36,6 +43,11 @@ struct SearchMedication: View {
         .onSubmit(of: .search) {
             searchDB()
         }
+        .onChange(of: drugVM.errorMessage, { oldValue, newValue in
+            if let newValue = newValue, !newValue.isEmpty {
+
+            }
+        })
         .navigationTitle("Search Medications")
 
 

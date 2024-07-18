@@ -7,7 +7,13 @@
 
 import Foundation
 
-struct DrugRowItem: Codable, Identifiable {
+struct DrugRowItem: Codable {
+    let status: Bool
+    let message: String
+    let data: [DrugRowData]?
+}
+
+struct DrugRowData: Codable, Identifiable {
     var id: String {
         return rxcui
     }

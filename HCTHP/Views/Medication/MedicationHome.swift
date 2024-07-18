@@ -15,7 +15,7 @@ struct MedicationHome: View {
         NavigationStack {
             VStack {
                 if let userDrugs = drugVM.savedDrugs {
-                        List(userDrugs.data) { item in
+                    List(userDrugs.data) { item in
                             MedicationItem(medineName: item.name)
                         }
 

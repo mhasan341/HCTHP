@@ -13,8 +13,9 @@ class DrugVM: ObservableObject {
     @AppStorage(Keys.AUTH_TOKEN) var authToken: String = ""
 
     @Published var isLoading = false
-    @Published var searchResult: [DrugRowItem] = []
+    @Published var searchResult: DrugRowItem?
     @Published var savedDrugs: DrugSavedItem?
+
     @Published var errorMessage: String?
 
     /// searchs the database using the given query
@@ -38,17 +39,24 @@ class DrugVM: ObservableObject {
 
             // Perform the network request
             let (data, _) = try await URLSession.shared.data(for: request)
-            let response = try JSONDecoder().decode([DrugRowItem].self, from: data)
+            let response = try JSONDecoder().decode(DrugRowItem.self, from: data)
+
+            print(response)
 
             DispatchQueue.main.async {
-                // success here
                 self.isLoading = false
-                self.searchResult = response
+                if response.status {
+                    // success here
+                    self.searchResult = response
+                } else {
+                    self.errorMessage = response.message
+                }
+
             }
         } catch(let error) {
             DispatchQueue.main.async {
                 self.isLoading = false
-                print(error.localizedDescription)
+                self.errorMessage = error.localizedDescription
             }
         }
     }

@@ -9,5 +9,5 @@ import Foundation
 
 class DrugSavedItem: Codable {
     let status: Bool
-    let data: [DrugRowItem]
+    let data: [DrugRowData]
 }
