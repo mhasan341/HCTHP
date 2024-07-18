@@ -10,9 +10,9 @@ import SwiftUI
 struct HCActionButton: View {
     
     var buttonTitle: String
-    var onTap: ()->Void?
+    @Binding var shouldDisableButton: Bool
 
-    @EnvironmentObject var authVM: AuthVM
+    var onTap: ()->Void?
 
     var body: some View {
         Button(action: {
@@ -23,10 +23,11 @@ struct HCActionButton: View {
                 .foregroundColor(.white)
                 .frame(maxWidth: .infinity)
                 .padding()
-                .background(authVM.shouldDisableLoginButton() ? .gray : .blue)
+                .background(shouldDisableButton ? .gray : .blue)
                 .cornerRadius(10)
                 .padding(.horizontal, 20)
                 .padding(.top, 40)
         }
+        .disabled(shouldDisableButton)
     }
 }

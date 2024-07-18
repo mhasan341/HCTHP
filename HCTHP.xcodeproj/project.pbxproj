@@ -21,6 +21,9 @@
 		51C66A772C43071200FF3DC6 /* Drug.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51C66A762C43071200FF3DC6 /* Drug.swift */; };
 		51C66A792C43082F00FF3DC6 /* AuthVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51C66A782C43082F00FF3DC6 /* AuthVM.swift */; };
 		51C66A7B2C43085200FF3DC6 /* DrugVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51C66A7A2C43085200FF3DC6 /* DrugVM.swift */; };
+		51DC31AF2C48EE49008E205A /* DrugRowItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51DC31AE2C48EE49008E205A /* DrugRowItem.swift */; };
+		51DC31B12C48F292008E205A /* SearchMedication.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51DC31B02C48F292008E205A /* SearchMedication.swift */; };
+		51DC31B32C497E88008E205A /* DrugSavedItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51DC31B22C497E88008E205A /* DrugSavedItem.swift */; };
 		51E83AF42C459A2D0066F4C6 /* ApiContant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51E83AF32C459A2D0066F4C6 /* ApiContant.swift */; };
 		51E83AF62C45A2580066F4C6 /* RegistrationObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51E83AF52C45A2580066F4C6 /* RegistrationObject.swift */; };
 		51E83AF82C46EB770066F4C6 /* UINavigationController+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51E83AF72C46EB770066F4C6 /* UINavigationController+Ext.swift */; };
@@ -50,6 +53,9 @@
 		51C66A782C43082F00FF3DC6 /* AuthVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthVM.swift; sourceTree = "<group>"; };
 		51C66A7A2C43085200FF3DC6 /* DrugVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrugVM.swift; sourceTree = "<group>"; };
 		51C66A7C2C431AB800FF3DC6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		51DC31AE2C48EE49008E205A /* DrugRowItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrugRowItem.swift; sourceTree = "<group>"; };
+		51DC31B02C48F292008E205A /* SearchMedication.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchMedication.swift; sourceTree = "<group>"; };
+		51DC31B22C497E88008E205A /* DrugSavedItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrugSavedItem.swift; sourceTree = "<group>"; };
 		51E83AF32C459A2D0066F4C6 /* ApiContant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiContant.swift; sourceTree = "<group>"; };
 		51E83AF52C45A2580066F4C6 /* RegistrationObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationObject.swift; sourceTree = "<group>"; };
 		51E83AF72C46EB770066F4C6 /* UINavigationController+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UINavigationController+Ext.swift"; sourceTree = "<group>"; };
@@ -140,6 +146,8 @@
 			children = (
 				51701FF12C448315009ED8D1 /* Auth */,
 				51C66A762C43071200FF3DC6 /* Drug.swift */,
+				51DC31AE2C48EE49008E205A /* DrugRowItem.swift */,
+				51DC31B22C497E88008E205A /* DrugSavedItem.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -194,6 +202,7 @@
 			isa = PBXGroup;
 			children = (
 				51E83B022C476ADB0066F4C6 /* MedicationHome.swift */,
+				51DC31B02C48F292008E205A /* SearchMedication.swift */,
 			);
 			path = Medication;
 			sourceTree = "<group>";
@@ -302,7 +311,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				51DC31AF2C48EE49008E205A /* DrugRowItem.swift in Sources */,
 				51701FEC2C446A2C009ED8D1 /* AppDelegate.swift in Sources */,
+				51DC31B12C48F292008E205A /* SearchMedication.swift in Sources */,
 				51E83B092C4792450066F4C6 /* MedicationItem.swift in Sources */,
 				51C66A792C43082F00FF3DC6 /* AuthVM.swift in Sources */,
 				51E83AF82C46EB770066F4C6 /* UINavigationController+Ext.swift in Sources */,
@@ -318,6 +329,7 @@
 				51701FE22C440B80009ED8D1 /* LoginView.swift in Sources */,
 				51E83AFF2C4743F00066F4C6 /* PasswordView.swift in Sources */,
 				51E83B032C476ADB0066F4C6 /* MedicationHome.swift in Sources */,
+				51DC31B32C497E88008E205A /* DrugSavedItem.swift in Sources */,
 				51E83AF62C45A2580066F4C6 /* RegistrationObject.swift in Sources */,
 				51E83AF42C459A2D0066F4C6 /* ApiContant.swift in Sources */,
 				51E83B012C47451A0066F4C6 /* HCActionButton.swift in Sources */,

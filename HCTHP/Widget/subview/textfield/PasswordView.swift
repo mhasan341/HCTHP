@@ -33,6 +33,7 @@ struct PasswordView: View {
             }
             .setTextFieldSecure(isSecure)
             .textContentType(.password)
+            .textInputAutocapitalization(.never)
             .padding()
             .background(Color(.systemGray6))
             .cornerRadius(10)

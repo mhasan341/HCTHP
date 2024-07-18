@@ -10,12 +10,13 @@ import SwiftUI
 struct ContentView: View {
     @EnvironmentObject var authVM: AuthVM
     
+    // here we display the root view of our application based on user's log in status
     var body: some View {
-        if authVM.isLoggedIn {
-            MedicationHome()
-        } else {
-            OnboardingView()
-        }
+            if authVM.isLoggedIn {
+                MedicationHome()
+            } else {
+                OnboardingView()
+            }
     }
 }
 

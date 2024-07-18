@@ -12,7 +12,7 @@ struct LoginView: View {
     @EnvironmentObject private var authVM: AuthVM
 
     // these will hold the values we'll send to server
-    @State private var email: String = ""
+    @State private var email: String = "mahmud@housecall.ae"
     @State private var password: String = ""
 
     // for our custom secure field
@@ -39,14 +39,10 @@ struct LoginView: View {
                 EmailView(email: $email, focusedField: _focusedField)
                 // for the password input
                 PasswordView(password: $password, focusedField: _focusedField) {
-                    if !authVM.shouldDisableLoginButton() {
+                    if !authVM.shouldDisableLoginButton {
                         login()
                     }
                 }
-
-
-
-
 
             } // VStack
             .padding(.horizontal, 20)
@@ -63,12 +59,11 @@ struct LoginView: View {
             Spacer()
 
             // the action button
-            HCActionButton(buttonTitle: "Log In") {
+            HCActionButton(buttonTitle: "Log In", shouldDisableButton: $authVM.shouldDisableLoginButton) {
                 // The validation for name, email and password will show the errors where required
                 // But we need to control the action button
                 login()
             }
-           // .disabled(authVM.shouldDisableLoginButton())
              // mahmud@housecall.ae
             // password
         } // VStack Main

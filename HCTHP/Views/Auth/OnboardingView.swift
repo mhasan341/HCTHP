@@ -11,7 +11,6 @@ struct OnboardingView: View {
     // just a little animation
     @State private var logoScale: CGFloat = 2.4
     @State private var buttonsVisible = false
-
     var body: some View {
 
         NavigationStack {
@@ -62,7 +61,6 @@ struct OnboardingView: View {
 
             } // VStack
             .toolbar(.hidden, for: .navigationBar)
-
         }
 
     }

@@ -10,12 +10,11 @@ import SwiftUI
 @main
 struct HCTHPApp: App {
     @UIApplicationDelegateAdaptor(AppDelegate.self) var appDelegate
-    @StateObject private var authVM = AuthVM()
 
     var body: some Scene {
         WindowGroup {
             ContentView()
-                .environmentObject(authVM)
+                .environmentObject(AuthVM())
         }
     }
 }

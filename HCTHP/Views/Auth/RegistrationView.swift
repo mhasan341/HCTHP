@@ -42,7 +42,7 @@ struct RegistrationView: View {
                 EmailView(email: $email, focusedField: _focusedField)
                 // for the password input
                 PasswordView(password: $password, focusedField: _focusedField) {
-                    if !authVM.shouldDisableRegistrationButton() {
+                    if !authVM.shouldDisableRegistrationButton {
                         doRegistration()
                     }
                 }
@@ -63,12 +63,11 @@ struct RegistrationView: View {
             Spacer()
 
            // the action button
-            HCActionButton(buttonTitle: "Create Account") {
+            HCActionButton(buttonTitle: "Create Account", shouldDisableButton: $authVM.shouldDisableRegistrationButton) {
                 // The validation for name, email and password will show the errors where required
                 // But we need to control the action button
                 doRegistration()
             }
-            .disabled(authVM.shouldDisableRegistrationButton())
 
 
 
