@@ -11,8 +11,7 @@ import Combine
 class AuthVM: ObservableObject {
     @AppStorage(Keys.AUTH_TOKEN) var authToken: String = ""
     /// Determines whether or not current user is logged in
-    @Published var isLoggedIn = true
-#warning("Change it")
+    @Published var isLoggedIn = false
     /// Indicates if the request to server is running or returned and stopped
     @Published var isLoading = false
 
@@ -39,6 +38,9 @@ class AuthVM: ObservableObject {
     @Published var nameValidationResult: Result<Bool, ValidationError>?
     @Published var emailValidationResult: Result<Bool, ValidationError>?
     @Published var passwordValidationResult: Result<Bool, ValidationError>?
+
+    @Published var shouldDisableLoginButton: Bool = true
+    @Published var shouldDisableRegistrationButton: Bool = true
 
     init() {
         setupValidations()
@@ -165,6 +167,7 @@ class AuthVM: ObservableObject {
             .sink { [weak self] name in
                 guard let self = self else { return }
                 self.nameValidationResult = self.validateNameConditions(name)
+                self.shouldDisableRegistrationButton =  checkRegistrationButtonDisabled()
             }
             .store(in: &cancellables)
 
@@ -174,6 +177,10 @@ class AuthVM: ObservableObject {
             .sink { [weak self] email in
                 guard let self = self else { return }
                 self.emailValidationResult = self.validateEmailConditions(email)
+
+                self.shouldDisableRegistrationButton =  checkRegistrationButtonDisabled()
+
+                self.shouldDisableLoginButton = checkLoginButtonDisabled()
             }
             .store(in: &cancellables)
 
@@ -183,8 +190,15 @@ class AuthVM: ObservableObject {
             .sink { [weak self] password in
                 guard let self = self else { return }
                 self.passwordValidationResult = self.validatePasswordConditions(password)
+
+                self.shouldDisableRegistrationButton =  checkRegistrationButtonDisabled()
+
+                self.shouldDisableLoginButton = checkLoginButtonDisabled()
+
             }
             .store(in: &cancellables)
+
+
     }
 
     /// Validates name and returns the result
@@ -256,7 +270,7 @@ class AuthVM: ObservableObject {
     //MARK: For action button
 
     /// returns if all input fields in registration view is valid
-    func shouldDisableRegistrationButton()->Bool{
+    private func checkRegistrationButtonDisabled()->Bool{
         if case .success(let nameIsValid) = nameValidationResult, nameIsValid,
            case .success(let emailIsValid) = emailValidationResult, emailIsValid,
            case .success(let passwordIsValid) = passwordValidationResult, passwordIsValid {
@@ -267,7 +281,7 @@ class AuthVM: ObservableObject {
     }
 
     /// returns if all input fields in login view is valid
-    func shouldDisableLoginButton()->Bool{
+    private func checkLoginButtonDisabled()->Bool {
         if case .success(let emailIsValid) = emailValidationResult, emailIsValid,
            case .success(let passwordIsValid) = passwordValidationResult, passwordIsValid {
             return false
@@ -276,8 +290,10 @@ class AuthVM: ObservableObject {
         }
     }
 
+    /// used to logout user from the app
     func logout(){
         isLoggedIn = false
+        self.authToken = ""
     }
 
 
