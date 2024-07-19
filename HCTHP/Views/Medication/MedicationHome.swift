@@ -10,6 +10,7 @@ import SwiftUI
 struct MedicationHome: View {
     @StateObject private var drugVM = DrugVM()
     @State private var isSearchViewPresent = false
+    @State private var isAlertPresent = false
 
     var body: some View {
         NavigationStack {
@@ -19,7 +20,9 @@ struct MedicationHome: View {
                         MedicationItem(medineName: item.name)
                             .swipeActions(edge: /*@START_MENU_TOKEN@*/.trailing/*@END_MENU_TOKEN@*/, allowsFullSwipe: /*@START_MENU_TOKEN@*/true/*@END_MENU_TOKEN@*/){
                                 Button("Delete"){
-                                    drugVM.deleteDrug(drugId: item.id)
+                                    Task {
+                                        await drugVM.deleteDrug(drugId: item.id)
+                                    }
                                 }
                             }.tint(.red)
                     }
@@ -45,6 +48,18 @@ struct MedicationHome: View {
         }
         .sheet(isPresented: $isSearchViewPresent) {
             SearchMedication(sheetShowing: $isSearchViewPresent)
+        }
+        .onChange(of: drugVM.medicationDeleteMessage, { oldValue, newValue in
+            if !newValue.isEmpty {
+                isAlertPresent = true
+            }
+        })
+        .alert(drugVM.medicationDeleteMessage, isPresented: $isAlertPresent) {
+            Button {
+                isAlertPresent.toggle()
+            } label: {
+                Text("Dismiss")
+            }
         }
         .onAppear {
             Task {
