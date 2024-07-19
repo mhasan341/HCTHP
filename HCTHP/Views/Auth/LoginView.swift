@@ -12,7 +12,7 @@ struct LoginView: View {
     @EnvironmentObject private var authVM: AuthVM
 
     // these will hold the values we'll send to server
-    @State private var email: String = "mahmud@housecall.ae"
+    @State private var email: String = ""
     @State private var password: String = ""
 
     // for our custom secure field

@@ -109,7 +109,6 @@ struct MedicationHome: View {
             }
         }
         .onAppear {
-            drugVM.isLoading = true
                 Task {
                     await drugVM.getUserDrugs()
                 }

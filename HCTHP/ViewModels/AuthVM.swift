@@ -163,6 +163,9 @@ class AuthVM: ObservableObject {
     private func setupValidations() {
         // Publisher for name
         nameSubject
+            .drop(while: { input in
+                input.isEmpty
+            })
             .dropFirst() // to prevent error from showing when user just opened the screen
             .sink { [weak self] name in
                 guard let self = self else { return }
@@ -173,6 +176,9 @@ class AuthVM: ObservableObject {
 
         // Publisher for email
         emailSubject
+            .drop(while: { input in
+                input.isEmpty
+            })
             .dropFirst() // Skip the first emitted value for email
             .sink { [weak self] email in
                 guard let self = self else { return }
@@ -186,6 +192,9 @@ class AuthVM: ObservableObject {
 
         // Publisher for password
         passwordSubject
+            .drop(while: { input in
+                input.isEmpty
+            })
             .dropFirst() // Skip the first emitted value for email
             .sink { [weak self] password in
                 guard let self = self else { return }
