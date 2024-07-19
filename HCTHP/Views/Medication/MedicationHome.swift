@@ -6,6 +6,8 @@
 //
 
 import SwiftUI
+import EventKit
+import EventKitUI
 
 struct MedicationHome: View {
     @StateObject private var drugVM = DrugVM()
@@ -28,10 +30,23 @@ struct MedicationHome: View {
                     }
 
                 } else {
-                        ContentUnavailableView("You don't have any medications to show", image: "drug_icon", description: nil)
-                }
 
-               // Spacer()
+                    // show the loading view based on status
+                    if drugVM.isLoading {
+                        ProgressView()
+                            .progressViewStyle(.circular)
+                            .scaleEffect(1.5)
+                            .padding(.top, 20)
+                    } else {
+                        // we have nothing to show
+                        ScrollView {
+                            ContentUnavailableView("You don't have any medications to show", image: "drug_icon", description: nil)
+                        }
+                    }
+
+
+                }
+                
                 SearchMedicationButton {
                     isSearchViewPresent = true
                 }

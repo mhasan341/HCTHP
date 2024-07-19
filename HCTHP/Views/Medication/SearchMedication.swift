@@ -17,7 +17,12 @@ struct SearchMedication: View {
             VStack {
                 if let searchResult = drugVM.searchResult, let resultData = searchResult.data {
                     List(resultData) { item in
-                        MedicationItem(medineName: item.name)
+                        NavigationLink {
+                            MedicationDetail(drugId: item.rxcui)
+                                .environmentObject(drugVM)
+                        } label: {
+                            MedicationItem(medineName: item.name)
+                        }
                     }
                 }
 

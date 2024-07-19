@@ -25,10 +25,12 @@ struct ApiConstant {
     static let medicationSearchUrl = "\(basePublicUrl)/drugs/search?drug_name="
 
     /// DELETE | Private: delete a saved drug for a user in server. parameter "rxcui" in x-www-form-urlencoded data
-    static let deleteUserSavedDrugsWithId = "\(baseUrl)/userDrug/delete"
+    static let deleteUserSavedDrugsWithId = "\(baseUrl)/medication/delete"
     /// GET | Private: returns all medications that are saved by this user
-    static let getMedicationsOfUserUrl = "\(baseUrl)/getDrugs/byUser"
+    static let getMedicationsOfUserUrl = "\(baseUrl)/medication/all"
     /// POST: Private: saves a medication is user's medication list in server. takes a parameter "rxcui" in form data
-    static let saveMedicationToUserUrl = "\(baseUrl)/drugs/save"
+    static let saveMedicationToUserUrl = "\(baseUrl)/medication/save"
+    /// GET: Private: gets details about a medication. takes "rxcui" as param
+    static let getMedicationDetailUrl = "\(baseUrl)/medication/details"
 
 }
