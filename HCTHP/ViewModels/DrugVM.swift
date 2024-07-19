@@ -23,7 +23,7 @@ class DrugVM: ObservableObject {
         do {
             // From RegistrationView, we'd make sure that the name, email and password is valid already
             // So we're not checking that here
-            guard let url = URL(string: "\(ApiContant.basePublicUrl)/drugs/search?drug_name=\(name)") else {
+            guard let url = URL(string: "\(ApiConstant.medicationSearchUrl)\(name)") else {
                 // we don't need to throw an error here
                 return
             }
@@ -69,7 +69,7 @@ class DrugVM: ObservableObject {
         do {
             // From RegistrationView, we'd make sure that the name, email and password is valid already
             // So we're not checking that here
-            guard let url = URL(string: "\(ApiContant.baseUrl)/getDrugs/byUser") else {
+            guard let url = URL(string: "\(ApiConstant.getMedicationsOfUserUrl)") else {
                 // we don't need to throw an error here
                 return
             }
@@ -101,6 +101,7 @@ class DrugVM: ObservableObject {
             }
         }
     }
+
 
     func deleteDrug(drugId: String) {
         let index = savedDrugs.firstIndex {$0.id == drugId}

@@ -7,8 +7,11 @@
 
 import SwiftUI
 
+/// Card to show an asset icon with Drug name
 struct MedicationItem: View {
+    // filled this to be used in test
     var medineName: String = "Medicine 1"
+
     var body: some View {
         HStack(spacing: 20) {
             Image("drug_icon")
@@ -19,8 +22,4 @@ struct MedicationItem: View {
                 .font(.body)
         }.padding(.vertical, 5)
     }
-}
-
-#Preview {
-    MedicationItem()
 }

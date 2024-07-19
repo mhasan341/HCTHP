@@ -53,7 +53,7 @@ class AuthVM: ObservableObject {
         do {
         // From RegistrationView, we'd make sure that the name, email and password is valid already
         // So we're not checking that here
-        guard let url = URL(string: "\(ApiContant.basePublicUrl)/register") else {
+        guard let url = URL(string: ApiConstant.registrationUrl) else {
             // we don't need to throw an error here
             return
         }
@@ -106,7 +106,7 @@ class AuthVM: ObservableObject {
 
             do {
                 // Create the URL
-                guard let url = URL(string: "\(ApiContant.basePublicUrl)/login") else {
+                guard let url = URL(string: ApiConstant.loginUrl) else {
                     return
                 }
 

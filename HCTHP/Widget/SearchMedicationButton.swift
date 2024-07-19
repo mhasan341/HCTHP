@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct SearchMedicationButton: View {
-
+    
     let onTap: () -> Void
     
     var body: some View {

@@ -7,6 +7,7 @@
 
 import SwiftUI
 
+/// Takes a title, a binding that control whether the button should be disabled or not and background color
 struct HCActionButton: View {
     
     var buttonTitle: String

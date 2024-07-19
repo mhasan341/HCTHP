@@ -58,6 +58,7 @@ public enum ValidationError: Error, Identifiable {
     }
 }
 
+/// error keys to access a value safety from any place of the app
 enum Keys {
     static let AUTH_TOKEN = "token"
     static let GENERIC_ERROR = "An error occured"

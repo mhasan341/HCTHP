@@ -7,6 +7,7 @@
 
 import SwiftUI
 
+/// TextField used in auth pages with validation, focus changing options
 struct PasswordView: View {
     
     @Binding var password: String
