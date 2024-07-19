@@ -11,8 +11,12 @@ import EventKitUI
 
 struct MedicationHome: View {
     @StateObject private var drugVM = DrugVM()
+
     @State private var isSearchViewPresent = false
     @State private var isAlertPresent = false
+    @State private var isReminderPresent = false
+
+    let store = EKEventStore(sources: .init())
 
     var body: some View {
         NavigationStack {
@@ -28,8 +32,15 @@ struct MedicationHome: View {
                                 }
                             }.tint(.red)
                             .swipeActions(edge: .leading, allowsFullSwipe: /*@START_MENU_TOKEN@*/true/*@END_MENU_TOKEN@*/){
+                                
                                 Button {
-                                    print("Adding Reminder")
+                                    
+                                    store.requestFullAccessToReminders { isGranted, errors in
+                                        print("Reminder Granted? \(isGranted)")
+                                        
+                                        isReminderPresent = true
+                                    }
+
                                 } label: {
                                     Image(systemName: "bell")
                                 }
@@ -70,9 +81,15 @@ struct MedicationHome: View {
             .navigationTitle("My Medications")
 
         }
+        // show searchview to make a search
         .sheet(isPresented: $isSearchViewPresent) {
             SearchMedication(sheetShowing: $isSearchViewPresent)
         }
+        // show the add event option from system
+        .sheet(isPresented: $isReminderPresent, content: {
+            ReminderView(store: store)
+        })
+        // if there is any error, it'll show here
         .onChange(of: drugVM.medicationDeleteMessage, { oldValue, newValue in
             if !newValue.isEmpty {
                 isAlertPresent = true
