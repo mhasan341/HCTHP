@@ -63,7 +63,7 @@ class DrugVM: ObservableObject {
     }
 
     func getDrugDetails(by id: String) async {
-        do {
+            do {
             guard let url = URL(string: "\(ApiConstant.getMedicationDetailUrl)?rxcui=\(id)") else {
                 // we don't need to throw an error here
                 return

@@ -24,6 +24,7 @@ struct SearchMedicationButton: View {
             onTap()
         }
         .foregroundStyle(.accent)
+        .padding(.bottom, 40)
 
     }
 }

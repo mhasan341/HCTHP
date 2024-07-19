@@ -27,6 +27,14 @@ struct MedicationHome: View {
                                     }
                                 }
                             }.tint(.red)
+                            .swipeActions(edge: .leading, allowsFullSwipe: /*@START_MENU_TOKEN@*/true/*@END_MENU_TOKEN@*/){
+                                Button {
+                                    print("Adding Reminder")
+                                } label: {
+                                    Image(systemName: "bell")
+                                }
+
+                            }
                     }
 
                 } else {
@@ -37,6 +45,7 @@ struct MedicationHome: View {
                             .progressViewStyle(.circular)
                             .scaleEffect(1.5)
                             .padding(.top, 20)
+                        Spacer()
                     } else {
                         // we have nothing to show
                         ScrollView {
@@ -46,7 +55,7 @@ struct MedicationHome: View {
 
 
                 }
-                
+
                 SearchMedicationButton {
                     isSearchViewPresent = true
                 }
@@ -77,12 +86,10 @@ struct MedicationHome: View {
             }
         }
         .onAppear {
-            Task {
-                await drugVM.getUserDrugs()
-            }
+            drugVM.isLoading = true
+                Task {
+                    await drugVM.getUserDrugs()
+                }
         }
-
     }
-
-    
 }
