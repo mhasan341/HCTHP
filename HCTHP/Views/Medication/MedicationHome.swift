@@ -23,7 +23,9 @@ struct MedicationHome: View {
             VStack {
                 if !drugVM.isLoading && !drugVM.savedDrugs.isEmpty {
                     List(drugVM.savedDrugs ) { item in
+
                         MedicationItem(medineName: item.name)
+                        // delete on left swipe
                             .swipeActions(edge: /*@START_MENU_TOKEN@*/.trailing/*@END_MENU_TOKEN@*/, allowsFullSwipe: /*@START_MENU_TOKEN@*/true/*@END_MENU_TOKEN@*/){
                                 Button("Delete"){
                                     Task {
@@ -31,6 +33,7 @@ struct MedicationHome: View {
                                     }
                                 }
                             }.tint(.red)
+                        // add reminder on right swipe
                             .swipeActions(edge: .leading, allowsFullSwipe: /*@START_MENU_TOKEN@*/true/*@END_MENU_TOKEN@*/){
                                 // this one adds a reminder
                                 // in real case we could do lots of customization
@@ -65,9 +68,9 @@ struct MedicationHome: View {
                         }
                     }
 
-
                 }
 
+                // the button that shows search view
                 SearchMedicationButton {
                     isSearchViewPresent = true
                 }
