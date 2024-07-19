@@ -28,6 +28,7 @@
 		51DC31B92C4AA675008E205A /* MedicationDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51DC31B82C4AA675008E205A /* MedicationDetail.swift */; };
 		51DC31BB2C4AAB85008E205A /* DrugDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51DC31BA2C4AAB84008E205A /* DrugDetail.swift */; };
 		51DC31BE2C4AC6F5008E205A /* ReminderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51DC31BD2C4AC6F5008E205A /* ReminderView.swift */; };
+		51DC31C02C4ADC78008E205A /* MedicationDetailInfoCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51DC31BF2C4ADC78008E205A /* MedicationDetailInfoCard.swift */; };
 		51E83AF42C459A2D0066F4C6 /* ApiConstant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51E83AF32C459A2D0066F4C6 /* ApiConstant.swift */; };
 		51E83AF62C45A2580066F4C6 /* RegistrationObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51E83AF52C45A2580066F4C6 /* RegistrationObject.swift */; };
 		51E83AF82C46EB770066F4C6 /* UINavigationController+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51E83AF72C46EB770066F4C6 /* UINavigationController+Ext.swift */; };
@@ -64,6 +65,7 @@
 		51DC31B82C4AA675008E205A /* MedicationDetail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MedicationDetail.swift; sourceTree = "<group>"; };
 		51DC31BA2C4AAB84008E205A /* DrugDetail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrugDetail.swift; sourceTree = "<group>"; };
 		51DC31BD2C4AC6F5008E205A /* ReminderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReminderView.swift; sourceTree = "<group>"; };
+		51DC31BF2C4ADC78008E205A /* MedicationDetailInfoCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MedicationDetailInfoCard.swift; sourceTree = "<group>"; };
 		51E83AF32C459A2D0066F4C6 /* ApiConstant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiConstant.swift; sourceTree = "<group>"; };
 		51E83AF52C45A2580066F4C6 /* RegistrationObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationObject.swift; sourceTree = "<group>"; };
 		51E83AF72C46EB770066F4C6 /* UINavigationController+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UINavigationController+Ext.swift"; sourceTree = "<group>"; };
@@ -225,6 +227,7 @@
 				51E83B0B2C47939B0066F4C6 /* button */,
 				51E83B0A2C4793700066F4C6 /* textfield */,
 				51E83B082C4792450066F4C6 /* MedicationItem.swift */,
+				51DC31BF2C4ADC78008E205A /* MedicationDetailInfoCard.swift */,
 			);
 			path = subview;
 			sourceTree = "<group>";
@@ -342,6 +345,7 @@
 				51701FE72C444908009ED8D1 /* TextInputField.swift in Sources */,
 				51E83AFD2C4741600066F4C6 /* EmailView.swift in Sources */,
 				51E83B052C476B0C0066F4C6 /* ContentView.swift in Sources */,
+				51DC31C02C4ADC78008E205A /* MedicationDetailInfoCard.swift in Sources */,
 				51701FE22C440B80009ED8D1 /* LoginView.swift in Sources */,
 				51E83AFF2C4743F00066F4C6 /* PasswordView.swift in Sources */,
 				51E83B032C476ADB0066F4C6 /* MedicationHome.swift in Sources */,

@@ -32,7 +32,8 @@ struct MedicationHome: View {
                                 }
                             }.tint(.red)
                             .swipeActions(edge: .leading, allowsFullSwipe: /*@START_MENU_TOKEN@*/true/*@END_MENU_TOKEN@*/){
-                                
+                                // this one adds a reminder
+                                // in real case we could do lots of customization
                                 Button {
                                     
                                     store.requestFullAccessToReminders { isGranted, errors in
@@ -98,6 +99,8 @@ struct MedicationHome: View {
         .alert(drugVM.medicationDeleteMessage, isPresented: $isAlertPresent) {
             Button {
                 isAlertPresent.toggle()
+                // reseting it for next use
+                drugVM.medicationDeleteMessage = ""
             } label: {
                 Text("Dismiss")
             }

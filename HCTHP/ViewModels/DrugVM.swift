@@ -21,6 +21,8 @@ class DrugVM: ObservableObject {
 
     @Published var drugDetailObject: DrugDetail?
 
+    @Published var medicationSaveMessage = ""
+
     /// searchs the database using the given query
     func searchDrugs(by name: String) async {
         do {
@@ -103,7 +105,7 @@ class DrugVM: ObservableObject {
 
     func addDrug(rxcui: String) async {
         do {
-            guard let url = URL(string: "\(ApiConstant.getMedicationDetailUrl)") else {
+            guard let url = URL(string: "\(ApiConstant.saveMedicationToUserUrl)?rxcui=\(rxcui)") else {
                 // we don't need to throw an error here
                 return
             }
@@ -114,24 +116,25 @@ class DrugVM: ObservableObject {
             }
 
             var request = URLRequest(url: url)
-            request.httpMethod = "GET"
+            request.httpMethod = "POST"
             request.setValue("application/json", forHTTPHeaderField: "Content-Type")
             request.setValue("Bearer \(authToken)", forHTTPHeaderField: "Authorization")
 
             // Perform the network request
             let (data, _) = try await URLSession.shared.data(for: request)
-            let response = try JSONDecoder().decode(DrugSavedItem.self, from: data)
+            let response = try JSONDecoder().decode(DrugDetail.self, from: data)
 
             DispatchQueue.main.async {
                 // success here
                 self.isLoading = false
-                self.savedDrugs = response.data
+
+                self.medicationSaveMessage = response.message
 
             }
         } catch(let error) {
             DispatchQueue.main.async {
                 self.isLoading = false
-                print(error.localizedDescription)
+                self.medicationSaveMessage = error.localizedDescription
             }
         }
     }
