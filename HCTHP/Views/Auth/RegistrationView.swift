@@ -81,9 +81,7 @@ struct RegistrationView: View {
         .onAppear {
             // resetting it for a new session in case previous data present
             authVM.detailedErrors = [:]
-            authVM.emailValidationResult = nil
-            authVM.passwordValidationResult = nil
-            authVM.nameValidationResult = nil
+            authVM.setupValidations()
         }
         // to show any alert related to email that came from server
         .alert(self.emailError, isPresented: $isErrorAlertShowing) {

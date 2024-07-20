@@ -87,8 +87,7 @@ struct LoginView: View {
             }
         }
         .onAppear {
-            authVM.emailValidationResult = nil
-            authVM.passwordValidationResult = nil
+            authVM.setupValidations()
         }
     }
 

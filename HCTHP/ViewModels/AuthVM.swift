@@ -25,7 +25,7 @@ class AuthVM: ObservableObject {
     @Published var detailedErrors: [String: String] = [:]
 
     // to store the combine cancellables
-    private var cancellables = Set<AnyCancellable>()
+    var cancellables = Set<AnyCancellable>()
 
     /// Emits the name string that needs to be validated.
     private let nameSubject = PassthroughSubject<String, Never>()
@@ -160,12 +160,14 @@ class AuthVM: ObservableObject {
 
     //MARK: Name Validation
     // setting up the validation process of name field using Combine
-    private func setupValidations() {
+    func setupValidations() {
+        // remove old bag
+        cancellables.removeAll()
+        nameValidationResult = nil
+        emailValidationResult = nil
+        passwordValidationResult = nil
         // Publisher for name
         nameSubject
-            .drop(while: { input in
-                input.isEmpty
-            })
             .dropFirst() // to prevent error from showing when user just opened the screen
             .sink { [weak self] name in
                 guard let self = self else { return }
@@ -176,9 +178,6 @@ class AuthVM: ObservableObject {
 
         // Publisher for email
         emailSubject
-            .drop(while: { input in
-                input.isEmpty
-            })
             .dropFirst() // Skip the first emitted value for email
             .sink { [weak self] email in
                 guard let self = self else { return }
@@ -192,9 +191,6 @@ class AuthVM: ObservableObject {
 
         // Publisher for password
         passwordSubject
-            .drop(while: { input in
-                input.isEmpty
-            })
             .dropFirst() // Skip the first emitted value for email
             .sink { [weak self] password in
                 guard let self = self else { return }
