@@ -67,14 +67,7 @@ struct MedicationHome: View {
                         Spacer()
                     } else {
                         // we have nothing to show
-                        ScrollView {
-                            // scrollView tightens view, so we want to put some space
-                            Spacer(minLength: 200)
-                            // we may opt for a system image as well
-                            //ContentUnavailableView("You don't have any medications to show", image: "drug_icon", description: nil)
-                            // Actuall this looks better
-                            ContentUnavailableView("You don't have any medications to show", systemImage: "pills.circle")
-                        }
+                        ScrollableContentNotAvailableView(contentTitle: "You don't have any medications to show")
                     }
 
                 }

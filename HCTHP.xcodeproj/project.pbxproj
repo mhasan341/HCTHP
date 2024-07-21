@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		5160DD9D2C4DAD4B00F40568 /* DrugIcon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5160DD9C2C4DAD4B00F40568 /* DrugIcon.swift */; };
+		5160DD9F2C4DAF4C00F40568 /* ScrollableContentNotAvailableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5160DD9E2C4DAF4C00F40568 /* ScrollableContentNotAvailableView.swift */; };
 		51701FDE2C440B68009ED8D1 /* OnboardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51701FDD2C440B68009ED8D1 /* OnboardingView.swift */; };
 		51701FE02C440B7A009ED8D1 /* RegistrationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51701FDF2C440B7A009ED8D1 /* RegistrationView.swift */; };
 		51701FE22C440B80009ED8D1 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51701FE12C440B80009ED8D1 /* LoginView.swift */; };
@@ -44,6 +45,7 @@
 
 /* Begin PBXFileReference section */
 		5160DD9C2C4DAD4B00F40568 /* DrugIcon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrugIcon.swift; sourceTree = "<group>"; };
+		5160DD9E2C4DAF4C00F40568 /* ScrollableContentNotAvailableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScrollableContentNotAvailableView.swift; sourceTree = "<group>"; };
 		51701FDD2C440B68009ED8D1 /* OnboardingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingView.swift; sourceTree = "<group>"; };
 		51701FDF2C440B7A009ED8D1 /* RegistrationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationView.swift; sourceTree = "<group>"; };
 		51701FE12C440B80009ED8D1 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
@@ -246,6 +248,7 @@
 				5160DD9A2C4DAD3600F40568 /* card */,
 				51E83B0B2C47939B0066F4C6 /* button */,
 				51E83B0A2C4793700066F4C6 /* textfield */,
+				5160DD9E2C4DAF4C00F40568 /* ScrollableContentNotAvailableView.swift */,
 			);
 			path = subview;
 			sourceTree = "<group>";
@@ -367,6 +370,7 @@
 				51DC31C02C4ADC78008E205A /* MedicationDetailInfoCard.swift in Sources */,
 				5160DD9D2C4DAD4B00F40568 /* DrugIcon.swift in Sources */,
 				51701FE22C440B80009ED8D1 /* LoginView.swift in Sources */,
+				5160DD9F2C4DAF4C00F40568 /* ScrollableContentNotAvailableView.swift in Sources */,
 				51E83AFF2C4743F00066F4C6 /* PasswordView.swift in Sources */,
 				51E83B032C476ADB0066F4C6 /* MedicationHome.swift in Sources */,
 				51DC31B32C497E88008E205A /* DrugSavedItem.swift in Sources */,

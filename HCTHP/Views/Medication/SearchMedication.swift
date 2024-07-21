@@ -31,12 +31,7 @@ struct SearchMedication: View {
                 }
                 // this view looks better with system image
                 if let error = drugVM.errorMessage, !error.isEmpty {
-                    // to make the pull to refresh work we need a scroll view
-                    ScrollView {
-                        // scrollView tightens view, so we want to put some space
-                        Spacer(minLength: 200)
-                        ContentUnavailableView("Sorry!", systemImage: "pills.circle", description: Text(error))
-                    }
+                    ScrollableContentNotAvailableView(contentTitle: "Sorry", contentDescription: error)
                 }
             }
             // by default sheets are dragged down to dismiss

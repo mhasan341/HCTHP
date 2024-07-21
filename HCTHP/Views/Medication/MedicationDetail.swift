@@ -43,12 +43,7 @@ struct MedicationDetail: View {
 
             } else {
                 if !drugVM.isLoading {
-                    // to make the pull to refresh work we need a scroll view
-                    ScrollView {
-                        // scrollView tightens view, so we want to put some space
-                        Spacer(minLength: 200)
-                        ContentUnavailableView("Sorry!", systemImage: "pills.circle", description: Text(drugVM.errorMessage ?? "Something went wrong."))
-                    }
+                    ScrollableContentNotAvailableView(contentTitle: "Sorry", contentDescription: drugVM.errorMessage)
                 }
             }
         }
