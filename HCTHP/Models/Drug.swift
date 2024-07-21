@@ -7,6 +7,7 @@
 
 import Foundation
 
+/// every information we have about a drug
 struct Drug: Codable, Identifiable {
     var id: String {
         return rxcui

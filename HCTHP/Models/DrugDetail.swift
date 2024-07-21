@@ -7,6 +7,7 @@
 
 import Foundation
 
+/// status, message and an optional Drug object, that holds the entire information we have about it
 class DrugDetail: Codable {
     let status: Bool
     let message: String
