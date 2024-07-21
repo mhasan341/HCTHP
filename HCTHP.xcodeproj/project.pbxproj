@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		5160DD9D2C4DAD4B00F40568 /* DrugIcon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5160DD9C2C4DAD4B00F40568 /* DrugIcon.swift */; };
 		51701FDE2C440B68009ED8D1 /* OnboardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51701FDD2C440B68009ED8D1 /* OnboardingView.swift */; };
 		51701FE02C440B7A009ED8D1 /* RegistrationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51701FDF2C440B7A009ED8D1 /* RegistrationView.swift */; };
 		51701FE22C440B80009ED8D1 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51701FE12C440B80009ED8D1 /* LoginView.swift */; };
@@ -42,6 +43,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		5160DD9C2C4DAD4B00F40568 /* DrugIcon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrugIcon.swift; sourceTree = "<group>"; };
 		51701FDD2C440B68009ED8D1 /* OnboardingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingView.swift; sourceTree = "<group>"; };
 		51701FDF2C440B7A009ED8D1 /* RegistrationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationView.swift; sourceTree = "<group>"; };
 		51701FE12C440B80009ED8D1 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
@@ -90,10 +92,26 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		5160DD9A2C4DAD3600F40568 /* card */ = {
+			isa = PBXGroup;
+			children = (
+				51E83B082C4792450066F4C6 /* MedicationItem.swift */,
+				51DC31BF2C4ADC78008E205A /* MedicationDetailInfoCard.swift */,
+			);
+			path = card;
+			sourceTree = "<group>";
+		};
+		5160DD9B2C4DAD4000F40568 /* image */ = {
+			isa = PBXGroup;
+			children = (
+				5160DD9C2C4DAD4B00F40568 /* DrugIcon.swift */,
+			);
+			path = image;
+			sourceTree = "<group>";
+		};
 		51701FE52C4448D2009ED8D1 /* Widget */ = {
 			isa = PBXGroup;
 			children = (
-				51DC31B62C49ACB3008E205A /* SearchMedicationButton.swift */,
 				51701FE62C444908009ED8D1 /* TextInputField.swift */,
 				51E83AF92C4726440066F4C6 /* subview */,
 			);
@@ -224,10 +242,10 @@
 		51E83AF92C4726440066F4C6 /* subview */ = {
 			isa = PBXGroup;
 			children = (
+				5160DD9B2C4DAD4000F40568 /* image */,
+				5160DD9A2C4DAD3600F40568 /* card */,
 				51E83B0B2C47939B0066F4C6 /* button */,
 				51E83B0A2C4793700066F4C6 /* textfield */,
-				51E83B082C4792450066F4C6 /* MedicationItem.swift */,
-				51DC31BF2C4ADC78008E205A /* MedicationDetailInfoCard.swift */,
 			);
 			path = subview;
 			sourceTree = "<group>";
@@ -245,6 +263,7 @@
 		51E83B0B2C47939B0066F4C6 /* button */ = {
 			isa = PBXGroup;
 			children = (
+				51DC31B62C49ACB3008E205A /* SearchMedicationButton.swift */,
 				51E83B002C47451A0066F4C6 /* HCActionButton.swift */,
 			);
 			path = button;
@@ -346,6 +365,7 @@
 				51E83AFD2C4741600066F4C6 /* EmailView.swift in Sources */,
 				51E83B052C476B0C0066F4C6 /* ContentView.swift in Sources */,
 				51DC31C02C4ADC78008E205A /* MedicationDetailInfoCard.swift in Sources */,
+				5160DD9D2C4DAD4B00F40568 /* DrugIcon.swift in Sources */,
 				51701FE22C440B80009ED8D1 /* LoginView.swift in Sources */,
 				51E83AFF2C4743F00066F4C6 /* PasswordView.swift in Sources */,
 				51E83B032C476ADB0066F4C6 /* MedicationHome.swift in Sources */,

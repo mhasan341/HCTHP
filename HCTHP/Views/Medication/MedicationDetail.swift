@@ -8,24 +8,22 @@
 import SwiftUI
 
 struct MedicationDetail: View {
+    // viewmodel to call the backend and publish result or error
     @EnvironmentObject private var drugVM: DrugVM
+    // to find the drug details we are interested in
     var drugId: String
+    // alert to show if the medication save is successful or not
     @State private var isAlertPresent = false
 
     var body: some View {
         VStack(alignment: .leading) {
             if let detailObject = drugVM.drugDetailObject, let detailData = detailObject.data {
-
                 // to show image on center
                 HStack {
                     Spacer()
-                    Image("drug_icon")
-                        .resizable()
-                        .frame(width: 50, height: 50)
+                    DrugIcon(withSize: 50)
                     Spacer()
                 }
-
-
                     VStack(alignment: .leading) {
                         MedicationDetailInfoCard(title: "Name", info: detailData.name)
                         MedicationDetailInfoCard(title: "Synonym", info: detailData.synonym)
@@ -45,7 +43,12 @@ struct MedicationDetail: View {
 
             } else {
                 if !drugVM.isLoading {
-                    ContentUnavailableView("Couldn't fetch medication details", image: "drug_icon", description: Text(drugVM.errorMessage ?? ""))
+                    // to make the pull to refresh work we need a scroll view
+                    ScrollView {
+                        // scrollView tightens view, so we want to put some space
+                        Spacer(minLength: 200)
+                        ContentUnavailableView("Sorry!", systemImage: "pills.circle", description: Text(drugVM.errorMessage ?? "Something went wrong."))
+                    }
                 }
             }
         }
@@ -56,6 +59,7 @@ struct MedicationDetail: View {
                 self.isAlertPresent = true
             }
         })
+        // showing an alert to let user know if they have saved this medication to their list or not
         .alert(drugVM.medicationSaveMessage, isPresented: $isAlertPresent) {
             Button {
                 isAlertPresent.toggle()
@@ -65,11 +69,20 @@ struct MedicationDetail: View {
                 Text("Dismiss")
             }
         }
+        // refresh the page again on pull
+        .refreshable {
+            getDrugDetails()
+        }
+        // when the page appears we want to fetch the details immediately
         .onAppear {
-            Task {
-                await drugVM.getDrugDetailsFor(rxcui: drugId)
-            }
+            getDrugDetails()
         }
 
+    }
+
+    private func getDrugDetails(){
+        Task {
+            await drugVM.getDrugDetailsFor(rxcui: drugId)
+        }
     }
 }
