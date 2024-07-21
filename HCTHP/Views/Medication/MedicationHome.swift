@@ -34,7 +34,7 @@ struct MedicationHome: View {
                             .swipeActions(edge: /*@START_MENU_TOKEN@*/.trailing/*@END_MENU_TOKEN@*/, allowsFullSwipe: /*@START_MENU_TOKEN@*/true/*@END_MENU_TOKEN@*/){
                                 Button("Delete"){
                                     Task {
-                                        await drugVM.deleteDrug(drugId: item.id)
+                                        await drugVM.deleteDrugOf(rxcui: item.id)
                                     }
                                 }
                             }.tint(.red)
@@ -69,7 +69,7 @@ struct MedicationHome: View {
                         // we have nothing to show
                         ScrollView {
                             // scrollView tightens view, so we want to put some space
-                            Spacer(minLength: 100)
+                            Spacer(minLength: 200)
                             // we may opt for a system image as well
                             //ContentUnavailableView("You don't have any medications to show", image: "drug_icon", description: nil)
                             // Actuall this looks better

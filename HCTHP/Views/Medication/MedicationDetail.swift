@@ -67,7 +67,7 @@ struct MedicationDetail: View {
         }
         .onAppear {
             Task {
-                await drugVM.getDrugDetails(by: drugId)
+                await drugVM.getDrugDetailsFor(rxcui: drugId)
             }
         }
 
