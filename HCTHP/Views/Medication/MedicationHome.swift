@@ -10,10 +10,13 @@ import EventKit
 import EventKitUI
 
 struct MedicationHome: View {
+    // view model that manages the backend calls and publishes result or error
     @StateObject private var drugVM = DrugVM()
-
+    // this flag makes the SearchView appear/disappear as modal
     @State private var isSearchViewPresent = false
+    // errors are presented to user using this alert
     @State private var isAlertPresent = false
+    // the EKEventEditVC is presented as modal using this flag
     @State private var isReminderPresent = false
 
     let store = EKEventStore(sources: .init())
@@ -21,7 +24,9 @@ struct MedicationHome: View {
     var body: some View {
         NavigationStack {
             VStack {
+                // if no data is loading and we don't have a empty list, only then we want to show the data
                 if !drugVM.isLoading && !drugVM.savedDrugs.isEmpty {
+                    
                     List(drugVM.savedDrugs ) { item in
 
                         MedicationItem(medineName: item.name)
@@ -53,7 +58,6 @@ struct MedicationHome: View {
                     }
 
                 } else {
-
                     // show the loading view based on status
                     if drugVM.isLoading {
                         ProgressView()
@@ -64,7 +68,12 @@ struct MedicationHome: View {
                     } else {
                         // we have nothing to show
                         ScrollView {
-                            ContentUnavailableView("You don't have any medications to show", image: "drug_icon", description: nil)
+                            // scrollView tightens view, so we want to put some space
+                            Spacer(minLength: 100)
+                            // we may opt for a system image as well
+                            //ContentUnavailableView("You don't have any medications to show", image: "drug_icon", description: nil)
+                            // Actuall this looks better
+                            ContentUnavailableView("You don't have any medications to show", systemImage: "pills.circle")
                         }
                     }
 
@@ -75,7 +84,7 @@ struct MedicationHome: View {
                     isSearchViewPresent = true
                 }
             }
-
+            // pull to refresh action
             .refreshable {
                 Task {
                     await drugVM.getUserDrugs()
@@ -99,6 +108,9 @@ struct MedicationHome: View {
                 isAlertPresent = true
             }
         })
+        // after we delete a drug from user's medication list the backend sends a success message
+        // we're showing it here, and making sure to empty that error message, so if we delete another
+        // the condition above triggers and the alert below shows
         .alert(drugVM.medicationDeleteMessage, isPresented: $isAlertPresent) {
             Button {
                 isAlertPresent.toggle()
@@ -108,6 +120,7 @@ struct MedicationHome: View {
                 Text("Dismiss")
             }
         }
+        // when user logs in or registers, we want to fetch the drugs he saved (if any)
         .onAppear {
                 Task {
                     await drugVM.getUserDrugs()
