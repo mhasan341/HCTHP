@@ -49,11 +49,11 @@ struct MedicationDetail: View {
         }
         .navigationTitle("Details")
         .navigationBarTitleDisplayMode(.inline)
-        .onChange(of: drugVM.medicationSaveMessage, { oldValue, newValue in
+        .onChange(of: drugVM.medicationSaveMessage){ newValue in
             if !newValue.isEmpty {
                 self.isAlertPresent = true
             }
-        })
+        }
         // showing an alert to let user know if they have saved this medication to their list or not
         .alert(drugVM.medicationSaveMessage, isPresented: $isAlertPresent) {
             Button {

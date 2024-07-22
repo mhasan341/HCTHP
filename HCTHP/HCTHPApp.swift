@@ -13,8 +13,8 @@ struct HCTHPApp: App {
 
     var body: some Scene {
         WindowGroup {
-            //ContentView()
-            MedicationHome()
+            ContentView()
+            //MedicationHome()
                 .environmentObject(AuthVM())
         }
     }

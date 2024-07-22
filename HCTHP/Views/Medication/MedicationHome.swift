@@ -44,10 +44,22 @@ struct MedicationHome: View {
                                 // in real case we could do lots of customization
                                 Button {
                                     
-                                    store.requestFullAccessToReminders { isGranted, errors in
-                                        print("Reminder Granted? \(isGranted)")
-                                        
-                                        isReminderPresent = true
+                                    if #available(iOS 17.0, *) {
+                                        store.requestFullAccessToReminders { isGranted, errors in
+                                            print("Reminder Granted? \(isGranted)")
+                                            
+                                            isReminderPresent = true
+                                        }
+                                    } else {
+                                        // Fallback on earlier versions
+                                        Task {
+                                            do {
+                                                try await store.requestAccess(to: .reminder) { isGranted, errors in
+                                                    print("Reminded Granted on 16? \(isGranted)")
+                                                }
+
+                                            }catch{}
+                                        }
                                     }
 
                                 } label: {
@@ -96,11 +108,11 @@ struct MedicationHome: View {
             ReminderView(store: store)
         })
         // if there is any error, it'll show here
-        .onChange(of: drugVM.medicationDeleteMessage, { oldValue, newValue in
+        .onChange(of: drugVM.medicationDeleteMessage) { newValue in
             if !newValue.isEmpty {
                 isAlertPresent = true
             }
-        })
+        }
         // after we delete a drug from user's medication list the backend sends a success message
         // we're showing it here, and making sure to empty that error message, so if we delete another
         // the condition above triggers and the alert below shows

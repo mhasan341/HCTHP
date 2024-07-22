@@ -74,7 +74,7 @@ struct RegistrationView: View {
         } // VStack
         .navigationBarBackButtonHidden()
         // To track errors
-        .onChange(of: authVM.detailedErrors) { oldValue, newValue in
+        .onChange(of: authVM.detailedErrors) { newValue in
             self.emailError = newValue["email", default: ""]
             self.isErrorAlertShowing = true
         }

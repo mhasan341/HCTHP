@@ -22,7 +22,25 @@ struct ScrollableContentNotAvailableView: View {
             //ContentUnavailableView("You don't have any medications to show", image: "drug_icon", description: nil)
             // Actuall this looks better
             // force unwrapping an optional won't cause an issue as we are checking first if it's not nil then we are force unwrapping
-            ContentUnavailableView(contentTitle, systemImage: systemImage, description: contentDescription != nil ? Text(contentDescription!) : nil)
+            if #available(iOS 17.0, *) {
+                ContentUnavailableView(contentTitle, systemImage: systemImage, description: contentDescription != nil ? Text(contentDescription!) : nil)
+            } else {
+                // Fallback on earlier versions
+                VStack(alignment: .center) {
+                    Image(systemName: systemImage)
+                        .resizable()
+                        .frame(width: 50, height: 50)
+
+                    Text(contentTitle)
+                        .bold()
+                        .font(.headline)
+
+                    Text(contentDescription ?? "")
+                        .font(.body)
+                }
+            }
+
+
         }
     }
 }

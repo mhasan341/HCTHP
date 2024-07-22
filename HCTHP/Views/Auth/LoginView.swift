@@ -69,7 +69,7 @@ struct LoginView: View {
         } // VStack Main
         .navigationBarBackButtonHidden()
         // To track errors
-        .onChange(of: authVM.loginError) { oldValue, newValue in
+        .onChange(of: authVM.loginError) {newValue in
 
             if let newValue = newValue, !newValue.isEmpty {
                 self.isAlertShowing = true
