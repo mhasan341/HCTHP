@@ -56,9 +56,11 @@ struct MedicationHome: View {
                                             do {
                                                 try await store.requestAccess(to: .reminder) { isGranted, errors in
                                                     print("Reminded Granted on 16? \(isGranted)")
+
+                                                    isReminderPresent = true
                                                 }
 
-                                            }catch{}
+                                            }
                                         }
                                     }
 
@@ -67,6 +69,7 @@ struct MedicationHome: View {
                                 }
 
                             }
+                            .tint(.blue)
                     }
 
                 } else {

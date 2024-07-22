@@ -64,6 +64,7 @@ struct LoginView: View {
                 // But we need to control the action button
                 login()
             }
+            .padding(.bottom, 20)
              // mahmud@housecall.ae
             // password
         } // VStack Main

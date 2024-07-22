@@ -68,6 +68,7 @@ struct RegistrationView: View {
                 // But we need to control the action button
                 doRegistration()
             }
+            .padding(.bottom, 20)
 
 
 
