@@ -184,54 +184,57 @@ class DrugVM: ObservableObject {
         let index = savedDrugs.firstIndex {$0.id == rxcui}
 
         if let index = index  {
-
-            do {
-                guard let url = URL(string: "\(ApiConstant.deleteUserSavedDrugsWithId)") else {
-                    // we don't need to throw an error here
-                    return
-                }
-
-                // since our data is already sanitized, we'd want the loader to show now
-                DispatchQueue.main.async {
-                    self.isLoading = true
-                }
-
-                var request = URLRequest(url: url)
-                request.httpMethod = "DELETE"
-                request.setValue("application/json", forHTTPHeaderField: "Content-Type")
-                request.setValue("Bearer \(authToken)", forHTTPHeaderField: "Authorization")
-
-                let body: [String: String] = ["rxcui": rxcui]
-                guard let bodyData = try? JSONSerialization.data(withJSONObject: body) else {
-                    DispatchQueue.main.async {
-                        self.isLoading = false
-                    }
-                    return
-                }
-                request.httpBody = bodyData
-
-                // Perform the network request
-                let (data, _) = try await URLSession.shared.data(for: request)
-                // DrugRowItem shares two mandatory field that matches with this response
-                // since we're not using this data anywhere, it's okay to use that
-                let response = try JSONDecoder().decode(DrugRowItem.self, from: data)
-
-                DispatchQueue.main.async {
-                    // success here
-                    self.isLoading = false
-                    if !response.status {
-                        self.medicationDeleteMessage = response.message
-                    } else {
-                        // if status is success we can just update the row and show some animations
-                        self.savedDrugs.remove(at: index)
-                    }
-
-                }
-            } catch(let error) {
-                DispatchQueue.main.async {
-                    self.isLoading = false
-                }
+            DispatchQueue.main.async {
+                self.savedDrugs.remove(at: index)
             }
+
+//            do {
+//                guard let url = URL(string: "\(ApiConstant.deleteUserSavedDrugsWithId)") else {
+//                    // we don't need to throw an error here
+//                    return
+//                }
+//
+//                // since our data is already sanitized, we'd want the loader to show now
+//                DispatchQueue.main.async {
+//                    self.isLoading = true
+//                }
+//
+//                var request = URLRequest(url: url)
+//                request.httpMethod = "DELETE"
+//                request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+//                request.setValue("Bearer \(authToken)", forHTTPHeaderField: "Authorization")
+//
+//                let body: [String: String] = ["rxcui": rxcui]
+//                guard let bodyData = try? JSONSerialization.data(withJSONObject: body) else {
+//                    DispatchQueue.main.async {
+//                        self.isLoading = false
+//                    }
+//                    return
+//                }
+//                request.httpBody = bodyData
+//
+//                // Perform the network request
+//                let (data, _) = try await URLSession.shared.data(for: request)
+//                // DrugRowItem shares two mandatory field that matches with this response
+//                // since we're not using this data anywhere, it's okay to use that
+//                let response = try JSONDecoder().decode(DrugRowItem.self, from: data)
+//
+//                DispatchQueue.main.async {
+//                    // success here
+//                    self.isLoading = false
+//                    if !response.status {
+//                        self.medicationDeleteMessage = response.message
+//                    } else {
+//                        // if status is success we can just update the row and show some animations
+//                        self.savedDrugs.remove(at: index)
+//                    }
+//
+//                }
+//            } catch(let error) {
+//                DispatchQueue.main.async {
+//                    self.isLoading = false
+//                }
+//            }
 
         }
     }

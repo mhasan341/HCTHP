@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		5160DD9D2C4DAD4B00F40568 /* DrugIcon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5160DD9C2C4DAD4B00F40568 /* DrugIcon.swift */; };
 		5160DD9F2C4DAF4C00F40568 /* ScrollableContentNotAvailableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5160DD9E2C4DAF4C00F40568 /* ScrollableContentNotAvailableView.swift */; };
+		5160DDA82C5086EB00F40568 /* MedicationDeleteAnimationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5160DDA72C5086EB00F40568 /* MedicationDeleteAnimationView.swift */; };
 		51701FDE2C440B68009ED8D1 /* OnboardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51701FDD2C440B68009ED8D1 /* OnboardingView.swift */; };
 		51701FE02C440B7A009ED8D1 /* RegistrationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51701FDF2C440B7A009ED8D1 /* RegistrationView.swift */; };
 		51701FE22C440B80009ED8D1 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51701FE12C440B80009ED8D1 /* LoginView.swift */; };
@@ -46,6 +47,7 @@
 /* Begin PBXFileReference section */
 		5160DD9C2C4DAD4B00F40568 /* DrugIcon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrugIcon.swift; sourceTree = "<group>"; };
 		5160DD9E2C4DAF4C00F40568 /* ScrollableContentNotAvailableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScrollableContentNotAvailableView.swift; sourceTree = "<group>"; };
+		5160DDA72C5086EB00F40568 /* MedicationDeleteAnimationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MedicationDeleteAnimationView.swift; sourceTree = "<group>"; };
 		51701FDD2C440B68009ED8D1 /* OnboardingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingView.swift; sourceTree = "<group>"; };
 		51701FDF2C440B7A009ED8D1 /* RegistrationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationView.swift; sourceTree = "<group>"; };
 		51701FE12C440B80009ED8D1 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
@@ -229,6 +231,7 @@
 				51E83B022C476ADB0066F4C6 /* MedicationHome.swift */,
 				51DC31B02C48F292008E205A /* SearchMedication.swift */,
 				51DC31B82C4AA675008E205A /* MedicationDetail.swift */,
+				5160DDA72C5086EB00F40568 /* MedicationDeleteAnimationView.swift */,
 			);
 			path = Medication;
 			sourceTree = "<group>";
@@ -365,6 +368,7 @@
 				5170922C2C418F4A00C2AFA7 /* HCTHPApp.swift in Sources */,
 				51701FDE2C440B68009ED8D1 /* OnboardingView.swift in Sources */,
 				51701FE72C444908009ED8D1 /* TextInputField.swift in Sources */,
+				5160DDA82C5086EB00F40568 /* MedicationDeleteAnimationView.swift in Sources */,
 				51E83AFD2C4741600066F4C6 /* EmailView.swift in Sources */,
 				51E83B052C476B0C0066F4C6 /* ContentView.swift in Sources */,
 				51DC31C02C4ADC78008E205A /* MedicationDetailInfoCard.swift in Sources */,
