@@ -184,6 +184,7 @@ class DrugVM: ObservableObject {
         let index = savedDrugs.firstIndex {$0.id == rxcui}
 
         if let index = index  {
+            #warning("Remove this and uncomment below")
             DispatchQueue.main.async {
                 self.savedDrugs.remove(at: index)
             }

@@ -19,7 +19,7 @@ struct MedicationDeleteAnimationView: View {
             DrugIcon(withSize: 32)
                 .opacity(show ? 1 : 0)
                 .offset(x: -100, y: change ? 650 : 100)
-                .animation(showAnimation ? .interpolatingSpring(stiffness: 10, damping: 20, initialVelocity: -3): .none, value: change)
+                .animation(showAnimation ? .interpolatingSpring(stiffness: 15, damping: 7, initialVelocity: -4): .none, value: change)
                 .zIndex(/*@START_MENU_TOKEN@*/1.0/*@END_MENU_TOKEN@*/)
             // trash
             Spacer()
