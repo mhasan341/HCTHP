@@ -11,5 +11,5 @@ import Foundation
 class DrugDetail: Codable {
     let status: Bool
     let message: String
-    var data: Drug?
+    var data: DrugDetailObject?
 }

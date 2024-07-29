@@ -164,12 +164,15 @@ class DrugVM: ObservableObject {
 
             // Perform the network request
             let (data, _) = try await URLSession.shared.data(for: request)
-            let response = try JSONDecoder().decode(DrugSavedItem.self, from: data)
+            let response = try JSONDecoder().decode(DrugRowItem.self, from: data)
 
             DispatchQueue.main.async {
                 // success here
                 self.isLoading = false
-                self.savedDrugs = response.data
+                if let savedDrugs = response.data {
+                    self.savedDrugs = savedDrugs
+                }
+
 
             }
         } catch(let error) {
