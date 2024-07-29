@@ -11,11 +11,9 @@ import SwiftUI
 struct MedicationItem: View {
     // filled this to be used in test
     var medineName: String = "Medicine 1"
-
     var body: some View {
         HStack(spacing: 20) {
             DrugIcon(withSize: 32)
-
             Text(medineName)
                 .font(.body)
         }.padding(.vertical, 5)
