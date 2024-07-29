@@ -68,22 +68,21 @@ struct RegistrationView: View {
                 // But we need to control the action button
                 doRegistration()
             }
+            .padding(.bottom, 20)
 
 
 
         } // VStack
         .navigationBarBackButtonHidden()
         // To track errors
-        .onChange(of: authVM.detailedErrors) { oldValue, newValue in
+        .onChange(of: authVM.detailedErrors) { newValue in
             self.emailError = newValue["email", default: ""]
             self.isErrorAlertShowing = true
         }
         .onAppear {
             // resetting it for a new session in case previous data present
             authVM.detailedErrors = [:]
-            authVM.emailValidationResult = nil
-            authVM.passwordValidationResult = nil
-            authVM.nameValidationResult = nil
+            authVM.setupValidations()
         }
         // to show any alert related to email that came from server
         .alert(self.emailError, isPresented: $isErrorAlertShowing) {

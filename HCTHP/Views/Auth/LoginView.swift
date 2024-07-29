@@ -12,7 +12,7 @@ struct LoginView: View {
     @EnvironmentObject private var authVM: AuthVM
 
     // these will hold the values we'll send to server
-    @State private var email: String = "mahmud@housecall.ae"
+    @State private var email: String = ""
     @State private var password: String = ""
 
     // for our custom secure field
@@ -64,12 +64,13 @@ struct LoginView: View {
                 // But we need to control the action button
                 login()
             }
+            .padding(.bottom, 20)
              // mahmud@housecall.ae
             // password
         } // VStack Main
         .navigationBarBackButtonHidden()
         // To track errors
-        .onChange(of: authVM.loginError) { oldValue, newValue in
+        .onChange(of: authVM.loginError) {newValue in
 
             if let newValue = newValue, !newValue.isEmpty {
                 self.isAlertShowing = true
@@ -87,8 +88,7 @@ struct LoginView: View {
             }
         }
         .onAppear {
-            authVM.emailValidationResult = nil
-            authVM.passwordValidationResult = nil
+            authVM.setupValidations()
         }
     }
 

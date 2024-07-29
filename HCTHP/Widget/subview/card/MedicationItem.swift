@@ -14,9 +14,7 @@ struct MedicationItem: View {
 
     var body: some View {
         HStack(spacing: 20) {
-            Image("drug_icon")
-                .resizable()
-                .frame(width: 32, height: 32)
+            DrugIcon(withSize: 32)
 
             Text(medineName)
                 .font(.body)

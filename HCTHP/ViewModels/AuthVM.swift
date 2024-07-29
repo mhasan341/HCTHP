@@ -25,7 +25,7 @@ class AuthVM: ObservableObject {
     @Published var detailedErrors: [String: String] = [:]
 
     // to store the combine cancellables
-    private var cancellables = Set<AnyCancellable>()
+    var cancellables = Set<AnyCancellable>()
 
     /// Emits the name string that needs to be validated.
     private let nameSubject = PassthroughSubject<String, Never>()
@@ -160,7 +160,12 @@ class AuthVM: ObservableObject {
 
     //MARK: Name Validation
     // setting up the validation process of name field using Combine
-    private func setupValidations() {
+    func setupValidations() {
+        // remove old bag
+        cancellables.removeAll()
+        nameValidationResult = nil
+        emailValidationResult = nil
+        passwordValidationResult = nil
         // Publisher for name
         nameSubject
             .dropFirst() // to prevent error from showing when user just opened the screen

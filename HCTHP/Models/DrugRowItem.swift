@@ -7,12 +7,14 @@
 
 import Foundation
 
+/// status, message and an array of [drug name and rxcui], array is optional
 struct DrugRowItem: Codable {
     let status: Bool
     let message: String
     let data: [DrugRowData]?
 }
 
+// drug name and rxcui
 struct DrugRowData: Codable, Identifiable {
     var id: String {
         return rxcui

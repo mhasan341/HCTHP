@@ -7,6 +7,7 @@
 
 import Foundation
 
+/// status and an array of [drug name and rxcui]
 class DrugSavedItem: Codable {
     let status: Bool
     var data: [DrugRowData]
