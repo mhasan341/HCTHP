@@ -51,11 +51,14 @@ class DrugVM: ObservableObject {
 
             DispatchQueue.main.async {
                 self.isLoading = false
+                // make sure we delete old data/error on success/failure
                 if response.status {
                     // success here
                     self.searchResult = response
+                    self.errorMessage = ""
                 } else {
                     self.errorMessage = response.message
+                    self.searchResult = nil
                 }
 
             }
@@ -108,7 +111,7 @@ class DrugVM: ObservableObject {
     }
 
     /// adds the drug to user's medication list
-    func addDrug(rxcui: String) async {
+    func addDrug(rxcui: String, name: String) async {
         do {
             guard let url = URL(string: "\(ApiConstant.saveMedicationToUserUrl)?rxcui=\(rxcui)") else {
                 // we don't need to throw an error here
@@ -133,7 +136,15 @@ class DrugVM: ObservableObject {
                 // success here
                 self.isLoading = false
 
-                self.medicationSaveMessage = response.message
+                if response.status {
+                    self.medicationSaveMessage = response.message
+                    self.errorMessage = ""
+                    self.savedDrugs.append(DrugRowData(rxcui: rxcui, name: name))
+                } else {
+                    self.medicationSaveMessage = ""
+                    self.errorMessage = response.message
+                }
+
 
             }
         } catch(let error) {
@@ -172,74 +183,68 @@ class DrugVM: ObservableObject {
                 if let savedDrugs = response.data {
                     self.savedDrugs = savedDrugs
                 }
-
-
             }
         } catch(let error) {
             DispatchQueue.main.async {
                 self.isLoading = false
+                self.errorMessage = error.localizedDescription
             }
         }
     }
 
     /// deletes a medication from user's saved medication list on server
     func deleteDrugOf(rxcui: String) async {
+        // we don't need to use the loader when we are deleting an item
         let index = savedDrugs.firstIndex {$0.id == rxcui}
 
         if let index = index  {
-            #warning("Remove this and uncomment below")
-            DispatchQueue.main.async {
-                self.savedDrugs.remove(at: index)
+            do {
+                guard let url = URL(string: "\(ApiConstant.deleteUserSavedDrugsWithId)") else {
+                    // we don't need to throw an error here
+                    return
+                }
+
+
+                var request = URLRequest(url: url)
+                request.httpMethod = "DELETE"
+                request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+                request.setValue("Bearer \(authToken)", forHTTPHeaderField: "Authorization")
+
+                let body: [String: String] = ["rxcui": rxcui]
+                guard let bodyData = try? JSONSerialization.data(withJSONObject: body) else {
+                    return
+                }
+                request.httpBody = bodyData
+
+                // Perform the network request
+                let (data, _) = try await URLSession.shared.data(for: request)
+                // DrugRowItem shares two mandatory field that matches with this response
+                // since we're not using this data anywhere, it's okay to use that
+                let response = try JSONDecoder().decode(DrugRowItem.self, from: data)
+
+                DispatchQueue.main.async {
+                    // success here
+                    // if status is false, we have a problem
+                    if !response.status {
+                        self.medicationDeleteMessage = response.message ?? ValidationError.serverError.localizedDescription
+                    } else {
+                        // if status is success we can just update the row and show some animations
+                        self.savedDrugs.remove(at: index)
+                    }
+
+                }
+            } catch(let error) {
+                DispatchQueue.main.async {
+                    self.errorMessage = error.localizedDescription
+                }
             }
 
-//            do {
-//                guard let url = URL(string: "\(ApiConstant.deleteUserSavedDrugsWithId)") else {
-//                    // we don't need to throw an error here
-//                    return
-//                }
-//
-//                // since our data is already sanitized, we'd want the loader to show now
-//                DispatchQueue.main.async {
-//                    self.isLoading = true
-//                }
-//
-//                var request = URLRequest(url: url)
-//                request.httpMethod = "DELETE"
-//                request.setValue("application/json", forHTTPHeaderField: "Content-Type")
-//                request.setValue("Bearer \(authToken)", forHTTPHeaderField: "Authorization")
-//
-//                let body: [String: String] = ["rxcui": rxcui]
-//                guard let bodyData = try? JSONSerialization.data(withJSONObject: body) else {
-//                    DispatchQueue.main.async {
-//                        self.isLoading = false
-//                    }
-//                    return
-//                }
-//                request.httpBody = bodyData
-//
-//                // Perform the network request
-//                let (data, _) = try await URLSession.shared.data(for: request)
-//                // DrugRowItem shares two mandatory field that matches with this response
-//                // since we're not using this data anywhere, it's okay to use that
-//                let response = try JSONDecoder().decode(DrugRowItem.self, from: data)
-//
-//                DispatchQueue.main.async {
-//                    // success here
-//                    self.isLoading = false
-//                    if !response.status {
-//                        self.medicationDeleteMessage = response.message
-//                    } else {
-//                        // if status is success we can just update the row and show some animations
-//                        self.savedDrugs.remove(at: index)
-//                    }
-//
-//                }
-//            } catch(let error) {
-//                DispatchQueue.main.async {
-//                    self.isLoading = false
-//                }
-//            }
+        }
+    }
 
+    func isDrugAdded(rxcui: String) -> Bool {
+        return savedDrugs.contains { data in
+            data.rxcui == rxcui
         }
     }
 }

@@ -20,8 +20,8 @@ struct MedicationDeleteAnimationView: View {
                 // pill
                 DrugIcon(withSize: 32)
                     .opacity(show ? 1 : 0)
-                    .offset(x: -100, y: change ? proxy.size.height - 120 : CGFloat(index * 40))
-                    .animation(showAnimation ? .interpolatingSpring(stiffness: 15, damping: 7, initialVelocity: -3): .none, value: change)
+                    .offset(x: -100, y: change ? proxy.size.height - 120 : CGFloat(index * 50))
+                    .animation(showAnimation ? .interactiveSpring(response: 0.85, dampingFraction: 0.7): .none, value: change)
                     .zIndex(/*@START_MENU_TOKEN@*/1.0/*@END_MENU_TOKEN@*/)
                 // trash
                 Spacer()

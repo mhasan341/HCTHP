@@ -10,7 +10,7 @@ import SwiftUI
 struct SearchMedication: View {
     // view model that manages the backend calls and publishes result or error
     // we're not using environmentObject because we want this view to own this VM
-    @StateObject private var drugVM = DrugVM()
+    @EnvironmentObject private var drugVM: DrugVM
     // the query user entered in the searchbox, we use this to search on backend
     @State private var searchQuery: String = ""
     // binding from MedicationHome that closes the search view, as we are presenting it as sheet
@@ -19,16 +19,27 @@ struct SearchMedication: View {
     var body: some View {
         NavigationStack {
             VStack {
+                // as usual we show a loader when we are loading data
+                if drugVM.isLoading {
+                    ProgressView()
+                        .progressViewStyle(.circular)
+                        .scaleEffect(1.5)
+                        .padding(.top, 20)
+                    Spacer()
+                }
+
                 if let searchResult = drugVM.searchResult, let resultData = searchResult.data {
                     List(resultData) { item in
                         NavigationLink {
-                            MedicationDetail(drugId: item.rxcui)
-                                .environmentObject(drugVM)
+                            MedicationDetail(drugId: item.rxcui, isDrugAdded: drugVM.isDrugAdded(rxcui: item.rxcui))
+                                
                         } label: {
                             MedicationItem(medineName: item.name)
                         }
                     }
-                }
+                } 
+
+
                 // this view looks better with system image
                 if let error = drugVM.errorMessage, !error.isEmpty {
                     ScrollableContentNotAvailableView(contentTitle: "Sorry", contentDescription: error)

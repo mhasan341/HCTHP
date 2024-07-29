@@ -29,8 +29,6 @@ struct MedicationHome: View {
 
     let store = EKEventStore(sources: .init())
 
-    @State private var scaleEffect = 0.2
-
     var body: some View {
         NavigationStack {
             ZStack(alignment: .bottom) {
@@ -41,14 +39,7 @@ struct MedicationHome: View {
                         List {
                             // Adding forEach for some additional enhancement
                             ForEach(Array(drugVM.savedDrugs.enumerated()), id: \.element.id) { index, item in
-
                                 MedicationItem(medineName: item.name)
-                                    .scaleEffect(scaleEffect)
-                                    .onAppear {
-                                        withAnimation(.spring) {
-                                            scaleEffect = 1.0
-                                        }
-                                    }
                                 // delete on left swipe
                                     .swipeActions(edge: /*@START_MENU_TOKEN@*/.trailing/*@END_MENU_TOKEN@*/, allowsFullSwipe: /*@START_MENU_TOKEN@*/true/*@END_MENU_TOKEN@*/){
                                         Button("Delete"){
@@ -91,11 +82,10 @@ struct MedicationHome: View {
                             ScrollableContentNotAvailableView(contentTitle: "You don't have any medications to show")
                         }
 
-                    }
+                    }// VSTack
 
 
-                } // VSTack
-                // ZStack
+                } // ZStack
 
                 MedicationDeleteAnimationView(index: pillPosition, show: $show, change: $change
                                               , showAnimation: $showAnimation)
@@ -118,6 +108,7 @@ struct MedicationHome: View {
         // show searchview to make a search
         .sheet(isPresented: $isSearchViewPresent) {
             SearchMedication(sheetShowing: $isSearchViewPresent)
+                .environmentObject(drugVM)
         }
         // show the add event option from system
         .sheet(isPresented: $isReminderPresent, content: {
@@ -129,6 +120,15 @@ struct MedicationHome: View {
                 isAlertPresent = true
             }
         }
+//        // when user dismissed the search view, we'd want to load the data again
+//        // in case he added more drugs
+//        .onChange(of: isSearchViewPresent) { newValue in
+//            if !isSearchViewPresent {
+//                Task {
+//                    await drugVM.getUserDrugs()
+//                }
+//            }
+//        }
         // after we delete a drug from user's medication list the backend sends a success message
         // we're showing it here, and making sure to empty that error message, so if we delete another
         // the condition above triggers and the alert below shows

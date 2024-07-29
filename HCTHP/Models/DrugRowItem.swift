@@ -15,7 +15,7 @@ struct DrugRowItem: Codable {
 }
 
 // drug name and rxcui
-struct DrugRowData: Codable, Identifiable {
+struct DrugRowData: Codable, Identifiable, Equatable {
     var id: String {
         return rxcui
     }
