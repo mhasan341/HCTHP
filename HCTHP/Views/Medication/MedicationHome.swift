@@ -33,7 +33,7 @@ struct MedicationHome: View {
 
     var body: some View {
         NavigationStack {
-            ZStack {
+            ZStack(alignment: .bottom) {
                 VStack {
                     // if no data is loading and we don't have a empty list, only then we want to show the data
                     if !drugVM.isLoading && !drugVM.savedDrugs.isEmpty {
@@ -87,16 +87,17 @@ struct MedicationHome: View {
 
                     }
 
-                    // the button that shows search view
-                    SearchMedicationButton {
-                        isSearchViewPresent = true
-                    }
+
                 } // VSTack
                 // ZStack
 
                 MedicationDeleteAnimationView(index: pillPosition, show: $show, change: $change
                                               , showAnimation: $showAnimation)
 
+                // the button that shows search view
+                SearchMedicationButton {
+                    isSearchViewPresent = true
+                }
             }
             // pull to refresh action
             .refreshable {
