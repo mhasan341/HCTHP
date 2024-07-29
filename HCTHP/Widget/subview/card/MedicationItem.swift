@@ -16,6 +16,7 @@ struct MedicationItem: View {
             DrugIcon(withSize: 32)
             Text(medineName)
                 .font(.body)
+                .transition(.scale.animation(.easeInOut))
         }.padding(.vertical, 5)
     }
 }

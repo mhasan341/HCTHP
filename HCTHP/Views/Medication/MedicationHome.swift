@@ -29,7 +29,7 @@ struct MedicationHome: View {
 
     let store = EKEventStore(sources: .init())
 
-
+    @State private var scaleEffect = 0.2
 
     var body: some View {
         NavigationStack {
@@ -42,30 +42,36 @@ struct MedicationHome: View {
                             // Adding forEach for some additional enhancement
                             ForEach(Array(drugVM.savedDrugs.enumerated()), id: \.element.id) { index, item in
 
-                                    MedicationItem(medineName: item.name)
-                                    // delete on left swipe
-                                        .swipeActions(edge: /*@START_MENU_TOKEN@*/.trailing/*@END_MENU_TOKEN@*/, allowsFullSwipe: /*@START_MENU_TOKEN@*/true/*@END_MENU_TOKEN@*/){
-                                            Button("Delete"){
-                                                Task {
-                                                    await drugVM.deleteDrugOf(rxcui: item.id)
-                                                }
-
-                                                pillPosition = index
-                                                // start the animation
-                                                controlAnimation()
-                                            }
-                                        }.tint(.red)
-                                    // add reminder on right swipe
-                                        .swipeActions(edge: .leading, allowsFullSwipe: /*@START_MENU_TOKEN@*/true/*@END_MENU_TOKEN@*/){
-                                            // this one adds a reminder
-                                            Button {
-                                                openReminder()
-                                            } label: {
-                                                Image(systemName: "bell")
-                                            }
-
+                                MedicationItem(medineName: item.name)
+                                    .scaleEffect(scaleEffect)
+                                    .onAppear {
+                                        withAnimation(.spring) {
+                                            scaleEffect = 1.0
                                         }
-                                        .tint(.blue)
+                                    }
+                                // delete on left swipe
+                                    .swipeActions(edge: /*@START_MENU_TOKEN@*/.trailing/*@END_MENU_TOKEN@*/, allowsFullSwipe: /*@START_MENU_TOKEN@*/true/*@END_MENU_TOKEN@*/){
+                                        Button("Delete"){
+                                            Task {
+                                                await drugVM.deleteDrugOf(rxcui: item.id)
+                                            }
+
+                                            pillPosition = index
+                                            // start the animation
+                                            controlAnimation()
+                                        }
+                                    }.tint(.red)
+                                // add reminder on right swipe
+                                    .swipeActions(edge: .leading, allowsFullSwipe: /*@START_MENU_TOKEN@*/true/*@END_MENU_TOKEN@*/){
+                                        // this one adds a reminder
+                                        Button {
+                                            openReminder()
+                                        } label: {
+                                            Image(systemName: "bell")
+                                        }
+
+                                    }
+                                    .tint(.blue)
 
 
                             } // ForEach
@@ -143,6 +149,7 @@ struct MedicationHome: View {
         }
     }
 
+    /// controls the animation of deletion of drug
     private func controlAnimation(){
         withAnimation {
             show.toggle()
@@ -172,9 +179,10 @@ struct MedicationHome: View {
         }
     }
 
+    // Current context of this app isn't suitable for adding a reminder,
+    // Calendar events offers more premade functions and options
+    /// Opens the calendar app for adding an event
     private func openReminder(){
-
-
             store.requestAccess(to: .reminder) { isGranted, error in
 
                 if let error = error {
