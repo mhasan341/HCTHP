@@ -10,7 +10,7 @@ import Foundation
 struct ApiConstant {
     //MARK: Base urls
     /// feturns the public api path in server
-    static let basePublicUrl = "http://127.0.0.1:8000/api" //"https://hcthp.premiercode.pro/api"
+    static let basePublicUrl = "https://hcthp.premiercode.pro/api" //"http://127.0.0.1:8000/api"
     /// returns the private api path in server, protected by sanctum
     static let baseUrl = "\(basePublicUrl)/v1"
 

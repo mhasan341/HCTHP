@@ -15,6 +15,7 @@ struct ReminderView: UIViewControllerRepresentable {
     var store: EKEventStore
 
     func makeUIViewController(context: Context) -> some UIViewController {
+        
         let vc = EKEventEditViewController()
         vc.eventStore = store
 

@@ -25,62 +25,49 @@ struct MedicationHome: View {
     @State var showAnimation = false
     // this one makes sure the pill gets visible first so we can see the initial velocity effect
     @State var show = false
+    @State var pillPosition = 0
 
     let store = EKEventStore(sources: .init())
 
     var body: some View {
         NavigationStack {
-            ZStack {
+            ZStack(alignment: .bottom) {
                 VStack {
                     // if no data is loading and we don't have a empty list, only then we want to show the data
                     if !drugVM.isLoading && !drugVM.savedDrugs.isEmpty {
-                        List(drugVM.savedDrugs) {item in
 
-                            MedicationItem(medineName: item.name)
-                            // delete on left swipe
-                                .swipeActions(edge: /*@START_MENU_TOKEN@*/.trailing/*@END_MENU_TOKEN@*/, allowsFullSwipe: /*@START_MENU_TOKEN@*/true/*@END_MENU_TOKEN@*/){
-                                    Button("Delete"){
-                                        Task {
-                                            await drugVM.deleteDrugOf(rxcui: item.id)
-                                        }
-
-                                        // start the animation
-                                        controlAnimation()
-                                    }
-                                }.tint(.red)
-                            // add reminder on right swipe
-                                .swipeActions(edge: .leading, allowsFullSwipe: /*@START_MENU_TOKEN@*/true/*@END_MENU_TOKEN@*/){
-                                    // this one adds a reminder
-                                    // in real case we could do lots of customization
-                                    Button {
-
-                                        if #available(iOS 17.0, *) {
-                                            store.requestFullAccessToReminders { isGranted, errors in
-                                                print("Reminder Granted? \(isGranted)")
-
-                                                isReminderPresent = true
-                                            }
-                                        } else {
-                                            // Fallback on earlier versions
+                        List {
+                            // Adding forEach for some additional enhancement
+                            ForEach(Array(drugVM.savedDrugs.enumerated()), id: \.element.id) { index, item in
+                                MedicationItem(medineName: item.name)
+                                // delete on left swipe
+                                    .swipeActions(edge: /*@START_MENU_TOKEN@*/.trailing/*@END_MENU_TOKEN@*/, allowsFullSwipe: /*@START_MENU_TOKEN@*/true/*@END_MENU_TOKEN@*/){
+                                        Button("Delete"){
                                             Task {
-                                                do {
-                                                    try await store.requestAccess(to: .reminder) { isGranted, errors in
-                                                        print("Reminded Granted on 16? \(isGranted)")
-
-                                                        isReminderPresent = true
-                                                    }
-
-                                                }
+                                                await drugVM.deleteDrugOf(rxcui: item.id)
                                             }
+
+                                            pillPosition = index
+                                            // start the animation
+                                            controlAnimation()
+                                        }
+                                    }.tint(.red)
+                                // add reminder on right swipe
+                                    .swipeActions(edge: .leading, allowsFullSwipe: /*@START_MENU_TOKEN@*/true/*@END_MENU_TOKEN@*/){
+                                        // this one adds a reminder
+                                        Button {
+                                            openReminder()
+                                        } label: {
+                                            Image(systemName: "bell")
                                         }
 
-                                    } label: {
-                                        Image(systemName: "bell")
                                     }
+                                    .tint(.blue)
 
-                                }
-                                .tint(.blue)
-                        }
+
+                            } // ForEach
+
+                        } // List
 
                     } else {
                         // show the loading view based on status
@@ -95,18 +82,18 @@ struct MedicationHome: View {
                             ScrollableContentNotAvailableView(contentTitle: "You don't have any medications to show")
                         }
 
-                    }
+                    }// VSTack
 
-                    // the button that shows search view
-                    SearchMedicationButton {
-                        isSearchViewPresent = true
-                    }
-                } // VSTack
-                // ZStack
 
-                MedicationDeleteAnimationView(show: $show, change: $change
+                } // ZStack
+
+                MedicationDeleteAnimationView(index: pillPosition, show: $show, change: $change
                                               , showAnimation: $showAnimation)
 
+                // the button that shows search view
+                SearchMedicationButton {
+                    isSearchViewPresent = true
+                }
             }
             // pull to refresh action
             .refreshable {
@@ -121,6 +108,7 @@ struct MedicationHome: View {
         // show searchview to make a search
         .sheet(isPresented: $isSearchViewPresent) {
             SearchMedication(sheetShowing: $isSearchViewPresent)
+                .environmentObject(drugVM)
         }
         // show the add event option from system
         .sheet(isPresented: $isReminderPresent, content: {
@@ -132,6 +120,15 @@ struct MedicationHome: View {
                 isAlertPresent = true
             }
         }
+//        // when user dismissed the search view, we'd want to load the data again
+//        // in case he added more drugs
+//        .onChange(of: isSearchViewPresent) { newValue in
+//            if !isSearchViewPresent {
+//                Task {
+//                    await drugVM.getUserDrugs()
+//                }
+//            }
+//        }
         // after we delete a drug from user's medication list the backend sends a success message
         // we're showing it here, and making sure to empty that error message, so if we delete another
         // the condition above triggers and the alert below shows
@@ -152,6 +149,7 @@ struct MedicationHome: View {
         }
     }
 
+    /// controls the animation of deletion of drug
     private func controlAnimation(){
         withAnimation {
             show.toggle()
@@ -173,11 +171,28 @@ struct MedicationHome: View {
                 showAnimation = true
             }
 
-            withAnimation(.default.delay(1)) {
+            withAnimation(.default.delay(0.7)) {
                 showAnimation = false
                 change.toggle()
                 show.toggle()
             }
         }
+    }
+
+    // Current context of this app isn't suitable for adding a reminder,
+    // Calendar events offers more premade functions and options
+    /// Opens the calendar app for adding an event
+    private func openReminder(){
+            store.requestAccess(to: .reminder) { isGranted, error in
+
+                if let error = error {
+                    print(error)
+                    return
+                }
+
+                if isGranted {
+                    isReminderPresent = true
+                }
+            }
     }
 }

@@ -8,12 +8,14 @@
 import SwiftUI
 
 struct MedicationDetail: View {
+    @Environment(\.dismiss) var dismiss
     // viewmodel to call the backend and publish result or error
     @EnvironmentObject private var drugVM: DrugVM
     // to find the drug details we are interested in
     var drugId: String
     // alert to show if the medication save is successful or not
     @State private var isAlertPresent = false
+    var isDrugAdded: Bool
 
     var body: some View {
         VStack(alignment: .leading) {
@@ -35,9 +37,9 @@ struct MedicationDetail: View {
 
                 Spacer()
                 // we don't need to disable this button as it doesn't depend on anything
-                HCActionButton(buttonTitle: "Add Medication to List", shouldDisableButton: .constant(false)) {
+                HCActionButton(buttonTitle: isDrugAdded ? "Already Added" : "Add Medication to List", shouldDisableButton: .constant(isDrugAdded)) {
                     Task {
-                        await drugVM.addDrug(rxcui: drugId)
+                        await drugVM.addDrug(rxcui: drugId, name: detailData.name)
                     }
                 }
 
@@ -60,6 +62,7 @@ struct MedicationDetail: View {
                 isAlertPresent.toggle()
                 // reset it for next use
                 drugVM.medicationSaveMessage = ""
+                dismiss()
             } label: {
                 Text("Dismiss")
             }
